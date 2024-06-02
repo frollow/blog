@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block wf_page_id %}66347d9e6fab56ada53cc407{% endblock wf_page_id %}
+{% load static %}
+{% block title %}Thank you{% endblock %}
+
+{% block content %}
+
+<div class="w-users-userformpagewrap page-wrapper-utility-pages">
+  <div data-w-id="62b0cb992aca610e33b3a86000000000000b" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="w-users-userloginformwrapper card form utility-pages">
+    <div class="w-users-userformheader">
+      <img alt="Log out" src="{% static 'images/check-done.svg' %}" class="mg-bottom-24px">
+      <h1 class="heading-h2-size">Thank you</h1>
+      <p>We appreciate you reaching out to us. Your message has been successfully sent, and one of our team members will get back to you as soon as possible.</p>
+      <p class="mg-top-12px mg-bottom-0"><a href="{% url 'homepage:index' %}">Home page</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %} 

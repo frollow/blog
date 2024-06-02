@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block wf_page_id %}66347d9e6fab56ada53cc3ca{% endblock wf_page_id %}
+
+{% load user_filters %}
+{% block title %}
+    Contact Us
+{% endblock %} 
+
+{% block header %}
+    Contact Us 
+{% endblock %}
+
+{% block content %}
+
+<div class="section top">
+  <div class="container-default w-container">
+    <div class="w-layout-grid grid-2-columns contact">
+      <div data-w-id="3cb99baa-e47a-d779-7c14-05151a16677d" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
+        <h1>Get in touch</h1>
+        <p class="mg-bottom-32px">Your feedback and inquiries are important to us. <br><br>Reach out to our team for any assistance or information you need.</p>
+        <div class="mg-bottom-16px">
+          <div class="text-200 bold color-neutral-800">Contact us via:</div>
+        </div>
+        <div>
+          <div class="inner-container _400px">
+            <div class="w-layout-grid grid-1-column contact">
+              <a href="mailto:info@wobidobi.com" class="card-link-icon w-inline-block">
+                <div class="line-rounded-icon contact-icon"></div>
+                <div class="text-200">info@wobidobi.com</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-w-id="3cb99baa-e47a-d779-7c14-05151a1667a5" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
+        <div class="card form w-form">
+          <form method="post" action="{% url 'contacts:contact' %}" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div class="w-layout-grid grid-2-columns form">
+              <div>{{ form.name.as_field_group }}</div>
+              <div>{{ form.email.as_field_group }}</div>
+              <div>{{ form.phone_number.as_field_group }}</div>
+              <div>{{ form.subject.as_field_group }}</div>
+              <div id="w-node-_3cb99baa-e47a-d779-7c14-05151a1667b9-a53cc3ca">
+                {{ form.message.as_field_group }}
+              </div>
+              <div>{{ form.captcha.as_field_group }}</div>
+            </div>
+            <button type="submit" class="btn-primary w-button">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

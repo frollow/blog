@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load user_filters %}
+{% block wf_page_id %}66347d9e6fab56ada53cc3ce{% endblock wf_page_id %}
+
+{% load render_json_ld from json_ld %}
+
+{% block title %}{{ post.title|truncatewords:4 }}{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block before_close_head %}
+{% render_json_ld sd %}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+{% thumbnail post.image "1024" crop="center" upscale=True as im %}
+<div class="section blog-post-hero" style="background-image:url('{{ im.url }}')">
+  <div class="container-default blog-post w-container">
+    <div data-w-id="66239862-f976-9aa5-4692-104b01ddc9f7" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="inner-container _740px">
+      <div>
+        <div class="blog-card-bg-badge-wrapper">
+          <a href="{% url 'posts:group' post.group.slug %}" class="badge-primary bold white link">{{ post.group }}</a>
+          {% if request.user.is_authenticated and request.user == post.author %}
+            <a href="{% url 'posts:edit' post.slug %}" class="badge-primary bold small white link">Edit</a>
+          {% endif %}
+        </div>
+        <h1 class="display-1 color-neutral-100 mg-bottom-32px">{{post.title}}</h1>
+        <div class="blog-card-details-container">
+          <div class="author-container">
+            <div class="avatar-circle _01 blog-card-bg-author-image">
+              {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
+                <div class="avatar-circle _01 blog-card-bg-author-image">
+                    <img src="{{ im.url }}" loading="eager">
+                </div>
+              {% endthumbnail %}
+            </div>
+            <a href="{% url 'posts:profile' post.author.username%}" target="_blank" rel="noopener noreferrer">
+            <div class="text-200 bold color-neutral-100">{{post.author.first_name}} {{post.author.last_name}}</div>
+            </a>
+          </div>
+          <div class="blog-card-bg-date-container">
+            <div class="line-rounded-icon clock-icon"></div>
+            <div class="text-200 bold color-neutral-100">{{post.pub_date|date:"F j, Y" }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-overlay-gradient blog-post"></div>
+</div>
+{% endthumbnail %}
+
+
+<div class="section main-posts post">
+  <div class="container-default w-container">
+    <div class="w-layout-grid grid-2-columns sidebar-content left">
+      {% include "includes/sidebar.html" %}
+      <div id="w-node-bbe442ff-821e-d89f-b98f-f15bad946368-a53cc3ce">
+        <div data-w-id="74944fe2-2ca0-2d4f-bf34-7f2c1b19df89" style="opacity:0" class="rich-text w-richtext">
+          {{ post.text|safe}}
+        </div>
+        <div class="divider mg-bottom-48px"></div>
+        {% if social %}
+          <div class="flex-horizontal space-between">
+            <div class="text-200 bold color-neutral-800">Share with your friends</div>
+            <div class="w-layout-grid social-media-grid-top right">
+              {% for link in social %}
+              {% if link.share_link %}
+                <a href="{{link.url}}{{link.share_link}}https://{{ request.get_host }}/{{ post.slug }}" class="social-icon-square no-bg w-inline-block">
+                  <div class="social-icon-font">{{ link.get_icon }}</div>
+                </a>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container-default w-container">
+    <div data-w-id="60bc858c-be07-823b-c8c8-acf93dd62984" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="w-layout-grid grid-2-columns title-and-categories">
+      <h2 class="mg-bottom-0">Related articles</h2>
+      {% if post.group.slug %}
+        <a id="w-node-_2802096f-6bb2-9026-954c-4585aa70a9c8-a53cc3ce" href="{% url 'posts:group' post.group.slug %}" class="btn-primary w-button">Browse all articles</a>
+      {% endif %}
+    </div>
+    <div class="w-dyn-list">
+      <div data-w-id="7c82d348-f271-5012-e28e-daf6f5a2817d" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" role="list" class="grid-3-columns w-dyn-items">
+        {% for post in related_posts %}
+        <div role="listitem" class="w-dyn-item">
+          <a data-w-id="7c82d348-f271-5012-e28e-daf6f5a2817f" href="{% url 'posts:post_detail' post.slug%}" class="blog-card-bg sidebar w-inline-block">
+            <div class="blog-card-bg-container small">
+              <div class="text-uppercase mg-bottom-16px">
+                <div class="text-200 bold color-neutral-100">{{post.group}}</div>
+              </div>
+              <h3 class="heading-h4-size color-neutral-100 mg-bottom-0">{{post.title}}</h3>
+            </div>
+            <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
+            {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
+              <img src="{{ im.url }}" class="blog-card-bg-image">
+            {% endthumbnail %}
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

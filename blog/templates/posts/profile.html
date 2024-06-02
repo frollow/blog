@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}Profile {{ username.get_full_name }} {% endblock %}
+{% block header %}All {{ username.get_full_name }} posts{% endblock %}
+
+{% block content %}
+
+<div class="section main-posts categories">
+  <div class="container-default w-container">
+      <div class="w-layout-grid grid-2-columns sidebar-content">
+          <div id="w-node-_504883fc-b26e-b64f-cfed-179d1ea0a43c-a53cc375">
+            <div class="header-col-2">
+              <div data-w-id="15ed5577-8de7-6600-70d7-d1be22af3790" style="opacity: 1;" class="_2-heading-wrapper no-mb">
+                  <h1 id="w-node-_699558eb-a04b-13e4-9899-aa385ada716d-1e6b134d" class="heading-h2-size mg-left-6px">{{author.first_name}} {{author.last_name}}</h1>
+                  <div class="heading-h2-size">articles: {{ posts.paginator.count }}</div>
+              </div>
+              {% if request.user.is_authenticated and request.user != author %}
+                {% if following %}
+                  <a class="btn-primary small white w-button" href="{% url 'posts:profile_unfollow' author.username %}" role="button">
+                    Unsubscribe
+                  </a>
+                {% else %}
+                  <a class="btn-primary small w-button" href="{% url 'posts:profile_follow' author.username %}" role="button">
+                    Subscribe
+                  </a>
+                {% endif %}
+              {% endif %}
+              </div>
+              <div data-w-id="18179618-f4f1-bf64-3fac-c197bb5b10d6" style="opacity:0" class="w-dyn-list">
+                  <div role="list" class="grid-1-column gap-row-48px w-dyn-items">
+                      {% for post in posts %}
+                      <div role="listitem" class="w-dyn-item">
+                          <a href="{% url 'posts:post_detail' post.slug %}" class="blog-card-featured-wrapper w-inline-block">
+                              <div data-w-id="18179618-f4f1-bf64-3fac-c197bb5b10da" class="w-layout-grid grid-2-columns blog-card-primary">
+                                  {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
+                                  <div class="blog-card-image-wrapper featured-v1">
+                                      <img src="{{ im.url }}" alt="" class="blog-card-image featured-v1">
+                                  </div>
+                                  {% endthumbnail %}
+                                  <div class="blog-card-content-default">
+                                        <div class="header-col-2">
+                                            <div data-w-id="15ed5577-8de7-6600-70d7-d1be22af3790" style="opacity: 1;" class="_2-heading-wrapper no-mb">
+                                                <div class="text-uppercase mg-bottom-16px">
+                                                    <div class="text-200 bold">{{post.group}}</div>
+                                                </div>
+                                            </div>
+                                            {% if request.user.is_authenticated and request.user == post.author %}
+                                                <a class="btn-primary small link" href="{% url 'posts:edit' post.slug %}" role="button">Edit</a>
+                                            {% endif %}
+                                        </div>
+                                      <h3>{{post.title}}</h3>
+                                      <p class="mg-bottom-24px">{{post.short_text}}</p>
+                                      <div class="blog-card-details-container">
+                                          <div class="author-container">
+                                              {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
+                                              <div class="avatar-circle _01 blog-card-bg-author-image">
+                                                  <img src="{{ im.url }}" loading="eager" alt="">
+                                              </div>
+                                              {% endthumbnail %}
+                                              <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>
+                                          </div>
+                                          <div class="blog-card-bg-date-container">
+                                              <div class="line-rounded-icon clock-icon dark"></div>
+                                              <div class="text-100 bold color-neutral-800">{{post.pub_date|date:"F j, Y" }}</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </a>
+                      </div>
+                      {% endfor %}
+                      {% include 'posts/includes/paginator.html' %}
+                  </div>
+              </div>
+          </div>
+          {% include "includes/sidebar.html" %}
+      </div>
+  </div>
+</div>
+{% endblock %}

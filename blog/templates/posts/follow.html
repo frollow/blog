@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Follow{% endblock %}
+{% block header %}Follow{% endblock %}
+{% block content %}
+{% load thumbnail %}
+{% include 'posts/includes/switcher.html' %}
+{% for post in page_obj %}
+    {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+        <img class="card-img my-2" src="{{ im.url }}">
+    {% endthumbnail %}
+    <h3>
+        Автор:
+            <a href="{% url 'posts:profile' post.author.username %}">
+            {{ post.author.username }}</a>, 
+        Дата публикации: {{ post.pub_date|date:"d M Y" }}
+    </h3>
+    <p>{{ post.text|linebreaksbr }}</p>
+    {% if post.group%}   
+        все записи группы: <a href="{% url 'posts:group' post.group.slug %}">"{{ post.group.title }}"</a>
+    {% endif %} 
+    {% if not forloop.last %}<hr>{% endif %} 
+{% endfor %}
+{% include 'posts/includes/paginator.html' %}
+{% endblock %}

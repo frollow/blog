@@ -1,0 +1,63 @@
+{% load static %}
+{% load thumbnail %}
+
+<div id="w-node-_79784bda-7807-708e-c89b-c286c2c65d0f-c2c65d0f" data-w-id="79784bda-7807-708e-c89b-c286c2c65d0f" class="sidebar">
+    <a href="/" class="logo-sidebar w-inline-block">
+        <img src="{% static 'images/logo.svg' %}" alt="Evoverse - Logo">
+    </a>
+    {% if show == no %}
+        <p class="mg-bottom-24px">Search our blog for articles and insights right here, just type your interest and dive into a world of knowledge.</p>
+        {% include "includes/search_input.html" %}
+    {% endif %}
+    <div class="divider _56px"></div>
+    <div class="w-dyn-list">
+        <div role="list" class="categories-wrapper-sidebar w-dyn-items">
+            {% for group in group_list%}
+                <div role="listitem" class="category-item-wrapper w-dyn-item">
+                    <a href="{% url 'posts:group' group.slug %}" class="badge-primary small light category">{{group.title}}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if random_post.slug %}
+    <div class="mg-bottom-64px w-dyn-list">
+        <div role="list" class="w-dyn-items">
+            <div role="listitem" class="w-dyn-item">
+                <a data-w-id="79784bda-7807-708e-c89b-c286c2c65d22" href="{% url 'posts:post_detail' random_post.slug %}" class="blog-card-bg sidebar w-inline-block">
+                    <div class="blog-card-bg-container small">
+                        <div class="text-uppercase mg-bottom-16px">
+                            <div class="text-200 bold color-neutral-100">{{random_post.group}}</div>
+                        </div>
+                        <h3 class="heading-h4-size color-neutral-100 mg-bottom-0">{{random_post.title}}</h3>
+                    </div>
+                    <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
+                    {% thumbnail random_post.image "314x314" crop="center" upscale=True as im %}
+                        <img src="{{ im.url }}" class="blog-card-bg-image">
+                    {% endthumbnail %}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <h2 data-w-id="79784bda-7807-708e-c89b-c286c2c65d2c" class="heading-h3-size mg-bottom-32px">Popular articles</h2>
+    <div data-w-id="79784bda-7807-708e-c89b-c286c2c65d2e" class="w-dyn-list">
+        <div role="list" class="grid-1-column gap-row-22px w-dyn-items">
+            {% for post in popular_list %}
+            <div role="listitem" class="w-dyn-item">
+                <a href="{% url 'posts:post_detail' post.slug%}" class="blog-card-featured-wrapper w-inline-block">
+                    <div data-w-id="79784bda-7807-708e-c89b-c286c2c65d32" class="w-layout-grid grid-2-columns blog-card-primary sidebar">
+                        {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
+                        <div class="blog-card-image-wrapper sidebar">
+                            <img src="{{ im.url }}" alt="" class="blog-card-image">
+                        </div>
+                        {% endthumbnail %}
+                        <div>
+                            <h4 class="heading-h5-size mg-bottom-0">{{post.title}}</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

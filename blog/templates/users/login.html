@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block wf_page_id %}66347d9e6fab56ada53cc407{% endblock wf_page_id %}
+{% load user_filters %}
+{% load static %}
+{% block title %}Log in to your account{% endblock %}
+
+{% block content %}
+
+
+<div class="w-users-userformpagewrap page-wrapper-utility-pages">
+  <div data-w-id="62b0cb992aca610e33b3a86000000000000b" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="w-users-userloginformwrapper card form utility-pages">
+    <div class="w-users-userformheader">
+      <img alt="Sign In" src="{% static 'images/password-writelogy-brix-templates.svg' %}" class="mg-bottom-24px">
+      <h1 class="heading-h2-size">Log in to your account</h1>
+      <p>Access personalized content and features securely.</p>
+    </div>
+    
+      <form {% if action_url %} action="{% url action_url %}" {% endif %} method="post" class="text-center" >
+        <div class="w-layout-grid grid-1-column">
+          {% csrf_token %} 
+          {{ form }}
+          <button type="submit" class="w-users-userformbutton btn-primary w-button" value="Log In">Login</button>
+        </div>
+      </form>
+    <div class="mg-top-24px text-center">
+      <a href="{% url 'password_reset' %}">Forgot your password?</a>
+    </div>
+    <p class="mg-top-12px mg-bottom-0">You don’t have an account? <a href="{% url 'users:signup' %}">Sign Up</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block before_close_body %}
+<link href="{% static 'css/form-helptext.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}

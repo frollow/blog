@@ -1,0 +1,20 @@
+<footer class="footer-wrapper">
+  <div data-w-id="06aad7a3-f803-05db-60f0-47a7ef403b7b" class="container-default w-container">
+    <div class="footer-top pd-72px">
+      <div class="inner-container _574px center">
+        <div class="text-center">
+          <div class="w-layout-grid social-media-grid-top center">
+            {% for link in social %}
+            <a href="{{link.url}}" class="social-icon-square no-bg w-inline-block">
+              <div class="social-icon-font">{{ link.get_icon }}</div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="mg-bottom-0">© {{ year }} Blog created by Frollow</p>
+    </div>
+  </div>
+</footer>

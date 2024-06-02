@@ -1,0 +1,29 @@
+{% if posts.has_other_pages %}
+  <div class="wf-section">
+    <div class="container__base w-container">
+      <div class="pagination_main_div">
+        <div class="pagination_wrap">
+          {% if posts.has_previous %}
+            <a href="?query={{ request.GET.query }}&page=1" class="pagination_item_link">First</a>
+            <a href="?query={{ request.GET.query }}&page={{ posts.previous_page_number }}" class="pagination_item_link"><</a>
+          {% endif %}
+          {% for page_number in posts.paginator.get_elided_page_range %}
+            {% if page_number == posts.paginator.ELLIPSIS %}
+              <div class="pagination_item_link">{{ page_number }}</div>
+            {% else %}
+              {% if page_number == posts.number %}
+                <div class="pagination_item_link active">{{ page_number }}</div>
+              {% else %}
+                <a href="?query={{ request.GET.query }}&page={{ page_number }}" class="pagination_item_link">{{ page_number }}</a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% if posts.has_next %}
+          <a href="?query={{ request.GET.query }}&page={{ posts.next_page_number }}" class="pagination_item_link">></a>
+          <a href="?query={{ request.GET.query }}&page={{ posts.paginator.num_pages }}" class="pagination_item_link">Last</a>
+          {% endif %} 
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

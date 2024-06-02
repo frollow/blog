@@ -1,0 +1,4 @@
+<form method="get" action="{% url 'search:search' %}" class="position-relative w-form">
+    <input class="input button-inside w-input" value="{% if form.query.value %}{{ form.query.value }}{% endif %}" maxlength="100" name="query" placeholder="Search articles" type="search" id="search" required="">
+    <input type="submit" class="btn-primary inside-input default w-button" value="Search">
+  </form>

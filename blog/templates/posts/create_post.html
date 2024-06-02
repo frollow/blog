@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block wf_page_id %}66347d9e6fab56ada53cc419{% endblock wf_page_id %}
+
+{% load user_filters %}
+{% block title %}
+  {% if is_edit %} Edit article {% else %} Create article {% endif %}
+{% endblock %} 
+
+{% block header %}
+  {% if is_edit %} Edit article {% else %} Create article {% endif %}  
+{% endblock %}
+
+{% block content %}
+
+<div class="w-users-userformpagewrap page-wrapper-utility-pages wide">
+  <div data-w-id="62b0cb992aca6122cbb3a86300000000000b" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="w-users-usersignupformwrapper card form utility-pages">
+    <div class="w-users-userformheader">
+      <h1 class="heading-h2-size">{% if is_edit %} Edit article {% else %} Create article {% endif %}</h1>
+      <p>{% if is_edit %}Refine your thoughts and update your article here.{% else %}Begin shaping your thoughts into an article today.{% endif %}</p>
+    </div>
+    <form method="post" action="
+        {% if is_edit %}
+            {% url 'posts:edit' post.slug %}
+        {% else %}
+            {% url 'posts:create' %}
+        {% endif %} 
+        " enctype="multipart/form-data">
+        {% csrf_token %} 
+        {{ form.as_p }}
+      <button type="submit" class="w-users-userformbutton btn-primary w-button">{% if is_edit %} Edit {% else %} Create {% endif %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

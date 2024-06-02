@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block wf_page_id %}66347d9e6fab56ada53cc375{% endblock wf_page_id %}
+
+{% block title %}Main page{% endblock %}
+{% block header %}Main page{% endblock %}
+
+
+{% block content %}
+<div class="section hero-home">
+    <div class="container-default w-container">
+        <div data-w-id="fea615bd-a7aa-4dbf-804a-b131c9f91c7e" style="opacity:0" class="w-layout-grid grid-2-columns hero-top">
+            <div id="w-node-_5f0a01e0-6dfa-e796-a518-3d071d120f4b-a53cc375" class="w-dyn-list">
+                <div role="list" class="w-dyn-items">
+                    {% for post in feature_list|slice:"0:1" %}
+                    <div role="listitem" class="w-dyn-item">
+                        <a data-w-id="8c1b25d4-3703-ca1c-2d51-fc41c3724cb5" href="{% url 'posts:post_detail' post.slug%}" class="blog-card-bg w-inline-block">
+                            <div class="blog-card-bg-container">
+                                <div class="blog-card-bg-badge-wrapper">
+                                    <div class="badge-primary small white">{{post.group}}</div>
+                                </div>
+                                <h2 class="display-4 blog-bg-title">{{post.title}}</h2>
+                                <div class="blog-card-details-container">
+                                    <div class="author-container">
+                                        <div class="avatar-circle _01 blog-card-bg-author-image">
+                                            {% thumbnail post.author.user_profile.image "500x500" crop="center" upscale=True as im %}
+                                            <img src="{{ im.url }}" loading="eager" alt="">
+                                            {% endthumbnail %}
+                                        </div>
+                                        <div class="text-100 bold color-neutral-100">{{post.author.first_name}} {{post.author.last_name}}</div>
+                                    </div>
+                                    <div class="blog-card-bg-date-container">
+                                        <div class="line-rounded-icon clock-icon"></div>
+                                        <div class="text-100 bold color-neutral-100">{{post.pub_date|date:"F j, Y" }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
+                            {% thumbnail post.image "698x526" crop="center" upscale=True as im %}
+                            <img src="{{ im.url }}" class="blog-card-bg-image">
+                            {% endthumbnail %}
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="w-node-ac5708bc-12ce-dffc-3330-b30c6c4052df-a53cc375" class="w-dyn-list">
+                <div role="list" class="w-dyn-items">
+                    {% for post in feature_list|slice:"1:" %}
+                    <div role="listitem" class="blog-card-heading-wrapper w-dyn-item">
+                        <a href="{% url 'posts:post_detail' post.slug%}" class="blog-card-heading w-inline-block">
+                            <div class="text-200 bold text-uppercase color-neutral-600">{{ post.group }}</div>
+                            <h3 class="mg-top-12px mg-bottom-0">{{ post.title }}</h3>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section main-posts">
+    <div class="container-default w-container">
+        <div class="w-layout-grid grid-2-columns sidebar-content">
+            <div id="w-node-_504883fc-b26e-b64f-cfed-179d1ea0a43c-a53cc375">
+                <h2 id="w-node-_2b509be3-5d10-2f2a-7cd4-6926a79b1361-a53cc375" data-w-id="2b509be3-5d10-2f2a-7cd4-6926a79b1361" style="opacity:0" class="heading-h3-size mg-bottom-32px">Lastest articles</h2>
+                <div data-w-id="18179618-f4f1-bf64-3fac-c197bb5b10d6" style="opacity:0" class="w-dyn-list">
+                    <div role="list" class="grid-1-column gap-row-48px w-dyn-items">
+                        {% for post in latest_list %}
+                        <div role="listitem" class="w-dyn-item">
+                            <a href="{% url 'posts:post_detail' post.slug%}" class="blog-card-featured-wrapper w-inline-block">
+                                <div data-w-id="18179618-f4f1-bf64-3fac-c197bb5b10da" class="w-layout-grid grid-2-columns blog-card-primary">
+                                    {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
+                                    <div class="blog-card-image-wrapper featured-v1">
+                                        <img src="{{ im.url }}" alt="" class="blog-card-image featured-v1">
+                                    </div>
+                                    {% endthumbnail %}
+                                    <div class="blog-card-content-default">
+                                        <div class="text-uppercase mg-bottom-16px">
+                                            <div class="text-200 bold">{{post.group}}</div>
+                                        </div>
+                                        <h3>{{post.title}}</h3>
+                                        <p class="mg-bottom-24px">{{post.short_text}}</p>
+                                        <div class="blog-card-details-container">
+                                            <div class="author-container">
+                                                {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
+                                                <div class="avatar-circle _01 blog-card-bg-author-image">
+                                                    <img src="{{ im.url }}" loading="eager" alt="">
+                                                </div>
+                                                {% endthumbnail %}
+                                                <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>
+                                            </div>
+                                            <div class="blog-card-bg-date-container">
+                                                <div class="line-rounded-icon clock-icon dark"></div>
+                                                <div class="text-100 bold color-neutral-800">{{post.pub_date|date:"F j, Y" }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% include "includes/sidebar.html" %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
