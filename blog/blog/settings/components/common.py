@@ -1,12 +1,11 @@
 import os
 
 from dotenv import load_dotenv
-from split_settings.tools import include
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -66,10 +65,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if DEBUG:
-    INSTALLED_APPS.append("debug_toolbar")
-    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
-
 # Login
 LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "posts:index"
@@ -99,13 +94,3 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     }
 }
-
-include(
-    "components/database.py",
-    "components/templates.py",
-    "components/internationalization.py",
-    "components/static.py",
-    "components/logging.py",
-    "components/celery.py",
-    "components/email.py",
-)

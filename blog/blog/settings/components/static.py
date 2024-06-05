@@ -1,7 +1,8 @@
 import os
+
 from django.conf import settings
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = settings.BASE_DIR
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
@@ -12,4 +13,5 @@ if settings.DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 else:
     MEDIA_ROOT = "/var/www/media/"
+    STATIC_ROOT = "/var/www/static/"
     STATIC_ROOT = "/var/www/static/"
