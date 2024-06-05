@@ -1,0 +1,23 @@
+from django.conf import settings
+
+# common.py
+SECRET_KEY = "secret_key"
+ALLOWED_HOSTS = ["host"]
+INTERNAL_IPS = ["127.0.0.1"]
+RECAPTCHA_PUBLIC_KEY = "public_key"
+RECAPTCHA_PRIVATE_KEY = "private_key"
+OPENAI_API_KEY = "key"
+
+# database.py
+DATABASE_OVERRIDES = {
+    "NAME": "name",
+    "USER": "username",
+    "PASSWORD": "userpass",
+    "HOST": "127.0.0.1",
+}
+settings.DATABASES["default"].update(DATABASE_OVERRIDES)
+
+# celery.py
+CELERY_BROKER_URL = "redis_host"
+CELERY_RESULT_BACKEND = "redis_host"
+CELERY_SINGLETON_BACKEND_URL = "redis_host"

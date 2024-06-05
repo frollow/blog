@@ -23,6 +23,7 @@ base_settings = [
     "components/templates.py",
     "components/internationalization.py",
     "components/static.py",
+    "components/caches.py",
     "components/logging.py",
     "components/celery.py",
     "components/email.py",
