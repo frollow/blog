@@ -1,6 +1,15 @@
 {% extends "base.html" %}
+{% block wf_page_id %}66347d9e6fab56ada53cc407{% endblock wf_page_id %}
+{% load static %}
 {% block title %}Error 403{% endblock %}
+
 {% block content %}
-    <h1>Error 403</h1>
-    <p><a href="{% url 'homepage:index' %}">Home page</a></p>
-{% endblock %}
+<div class="w-users-userformpagewrap page-wrapper-utility-pages">
+  <div data-w-id="62b0cb992aca610e33b3a86000000000000b" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="w-users-userloginformwrapper card form utility-pages">
+    <div class="w-users-userformheader">
+      <h1 class="heading-h2-size">Error 403</h1>
+      <p class="mg-top-12px mg-bottom-0"><a href="{% url 'homepage:index' %}">Home page</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %} 

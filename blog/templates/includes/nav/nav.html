@@ -105,13 +105,14 @@
                 <div class="dropdown-pd small extra">
                   <div class="w-layout-grid grid-1-column dropdown-link-column single">
                     {% if request.user.is_authenticated %}
-                    <a href="{% url 'posts:profile' request.user %}" class="dropdown-link w-dropdown-link">Account</a>
+                      <a href="{% url 'posts:profile' request.user %}" class="dropdown-link w-dropdown-link">Account</a>
+                      <a href="{% url 'users:password_change' %}" class="dropdown-link w-dropdown-link">Settings</a>
                       <form method="post" action="{% url 'users:logout' %}">
                         {% csrf_token %}
-                        <button class="log-link" type="submit">Log out</button>
+                        <button class="log-link" type="submit">Log Out</button>
                       </form>
                     {% else %}
-                      <a href="{% url 'users:login' %}" class="dropdown-link w-dropdown-link">Log in</a>
+                      <a href="{% url 'users:login' %}" class="dropdown-link w-dropdown-link">Log In</a>
                       <a href="{% url 'users:signup' %}" class="dropdown-link w-dropdown-link">Sign Up</a>
                     {% endif %}
                   </div>
