@@ -36,6 +36,8 @@ WSGI_APPLICATION = "blog.wsgi.application"
 POSTS_FOR_PAGINATION = 10
 THUMBNAIL_FORMAT = "WEBP"
 
+AUTH_USER_MODEL = "users.User"
+
 INSTALLED_APPS = [
     "sorl.thumbnail",
     "homepage.apps.HomepageConfig",
@@ -54,6 +56,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_recaptcha",
     "django_json_ld",
+    "ckeditor",
+    "ckeditor_uploader",
+    
 ]
 
 MIDDLEWARE = [

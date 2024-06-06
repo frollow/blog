@@ -3,18 +3,36 @@ from django.db import models
 from django.utils import timezone
 from sorl.thumbnail import get_thumbnail
 
+from .validators import (
+    validate_file_extension,
+    validate_image_size,
+    validate_links_in_input,
+    validate_post_name,
+    validate_slug,
+)
+
 User = get_user_model()
 
 
 class Post(models.Model):
     title = models.CharField(
-        max_length=100, verbose_name="Title", null=True, db_index=True
+        validators=[validate_post_name],
+        max_length=100,
+        verbose_name="Title",
+        null=True,
+        db_index=True,
     )
-    slug = models.SlugField(max_length=50, unique=True, null=True, verbose_name="Slug")
+    slug = models.SlugField(
+        validators=[validate_slug],
+        max_length=50,
+        unique=True,
+        null=True,
+        verbose_name="Slug",
+    )
     short_text = models.TextField(
         max_length=95, verbose_name="Short text", blank=True, db_index=True
     )
-    text = models.TextField(verbose_name="Body")
+    text = models.TextField(verbose_name="Body", validators=[validate_links_in_input])
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -28,7 +46,11 @@ class Post(models.Model):
         verbose_name="Group",
         null=True,
     )
-    image = models.ImageField("Image", upload_to="posts/")
+    image = models.ImageField(
+        "Image",
+        upload_to="posts/",
+        validators=[validate_image_size, validate_file_extension],
+    )
     feature = models.BooleanField(verbose_name="Feature", default=False)
     pub_date = models.DateTimeField(
         "Publish date", blank=True, null=True, db_index=True

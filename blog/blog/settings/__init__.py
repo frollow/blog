@@ -27,6 +27,8 @@ base_settings = [
     "components/logging.py",
     "components/celery.py",
     "components/email.py",
+    "components/ckeditor.py",
+    "components/sanitizer.py",
 
     # Select the right env:
     "environments/%s.py" % ENV,

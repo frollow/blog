@@ -79,7 +79,7 @@ class UserProfileForm(forms.ModelForm):
 
 class AccountLoginForm(AuthenticationForm):
     username = UsernameField(
-        widget=forms.TextInput(attrs={"class": "input w-input", "autofocus": True, "placeholder": "Username"}),
+        widget=forms.TextInput(attrs={"class": "input w-input", "autofocus": True, "placeholder": "Email"}),
         label="",
     )
     password = forms.CharField(

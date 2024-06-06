@@ -1,6 +1,14 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
+# from html_sanitizer.django import get_sanitizer
 
 from .models import Comment, Post
+
+# sanitizer = get_sanitizer(name="post_form_inputs")
+
+
+class CourseFormCKEditorWidget(CKEditorWidget):
+    template_name = "custom_ckeditor/widget.html"
 
 
 class PostForm(forms.ModelForm):
@@ -10,6 +18,14 @@ class PostForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             if field_name != "published":
                 field.label = ""
+        if "cached_filename" in self.initial:
+            self.fields["image"].widget.attrs["data-cached-filename"] = self.initial[
+                "cached_filename"
+            ]
+
+    # def clean_text(self):
+    #     value = self.cleaned_data.get("text")
+    #     return sanitizer.sanitize(value)
 
     class Meta:
         model = Post
@@ -38,16 +54,23 @@ class PostForm(forms.ModelForm):
                     "placeholder": "Short description",
                 }
             ),
-            "text": forms.Textarea(
+            "text": CourseFormCKEditorWidget(
+                config_name="cke_post_form_inputs",
                 attrs={
                     "class": "input w-input",
                     "maxlength": "4000",
                     "placeholder": "Body",
-                }
+                },
             ),
             "group": forms.Select(
                 attrs={
                     "class": "w-commerce-commercecheckoutshippingcountryselector input medium last",
+                }
+            ),
+            "image": forms.ClearableFileInput(
+                attrs={
+                    "class": "custom-image-upload-class",
+                    "accept": "image/*",
                 }
             ),
         }

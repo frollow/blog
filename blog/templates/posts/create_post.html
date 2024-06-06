@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %} 
 {% block wf_page_id %}66347d9e6fab56ada53cc419{% endblock wf_page_id %}
 
 {% load user_filters %}
@@ -10,8 +11,12 @@
   {% if is_edit %} Edit article {% else %} Create article {% endif %}  
 {% endblock %}
 
-{% block content %}
+{% block before_close_head %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
 
+{% block content %}
 <div class="w-users-userformpagewrap page-wrapper-utility-pages wide">
   <div data-w-id="62b0cb992aca6122cbb3a86300000000000b" style="-webkit-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 10%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="w-users-usersignupformwrapper card form utility-pages">
     <div class="w-users-userformheader">
@@ -31,4 +36,14 @@
     </form>
   </div>
 </div>
+{% endblock %}
+
+{% block before_close_body %}
+  <link href="{% static 'css/form-helptext.css' %}" rel="stylesheet" type="text/css">
+  <script  src="{% static 'js/form/image.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+      $(".django-ckeditor-widget").css("width", "100%")
+  });
+  </script>
 {% endblock %}
