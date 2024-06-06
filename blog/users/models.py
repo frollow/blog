@@ -28,7 +28,7 @@ class User(AbstractUser):
         verbose_name="Email confirmed",
     )
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["username"]
 
     def __str__(self):
         return self.username

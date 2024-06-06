@@ -36,7 +36,6 @@ WSGI_APPLICATION = "blog.wsgi.application"
 POSTS_FOR_PAGINATION = 10
 THUMBNAIL_FORMAT = "WEBP"
 
-AUTH_USER_MODEL = "users.User"
 
 INSTALLED_APPS = [
     "sorl.thumbnail",
@@ -71,6 +70,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+AUTH_USER_MODEL = "users.User"
 
 # Login
 LOGIN_URL = "users:login"
