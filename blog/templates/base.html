@@ -4,13 +4,15 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Wobidobi - The Social Media You'll Ever Need{% endblock %}</title>
-  <meta content="Wobidobi is your go-to free news blog. With Wobidobi, stay updated with the latest news and trends effortlessly." name="description">
-  <meta content="Wobidobi - Your Free News Blog" property="og:title">
-  <meta content="Wobidobi is your go-to free news blog. With Wobidobi, stay updated with the latest news and trends effortlessly." property="og:description">
-  <meta content="https://uploads-ssl.webflow.com/62abc23e594f83b60b6b133d/62af4f42e7e7cffd6759ac29_writelogy-x-open-graph-webflow-template.png" property="og:image">
-  <meta content="Wobidobi - Your Free News Blog" property="twitter:title">
-  <meta content="Wobidobi is your go-to free news blog. With Wobidobi, stay updated with the latest news and trends effortlessly." property="twitter:description">
-  <meta content="https://uploads-ssl.webflow.com/62abc23e594f83b60b6b133d/62af4f42e7e7cffd6759ac29_writelogy-x-open-graph-webflow-template.png" property="twitter:image">  
+  <meta content="{% block description %}Wobidobi - The Social Media You'll Ever Need{% endblock %}" name="description">
+
+  <meta content="{% block og_title %}Wobidobi - The Social Media You'll Ever Need{% endblock og_title %}" property="og:title">
+  <meta content="{% block og_description %}Wobidobi - The Social Media You'll Ever Need{% endblock og_description %}" property="og:description">
+  <meta content="{% block og_image %}https://uploads-ssl.webflow.com/62abc23e594f83b60b6b133d/62af4f42e7e7cffd6759ac29_writelogy-x-open-graph-webflow-template.png{% endblock og_image %}" property="og:image">
+  <meta content="{% block twitter_title %}Wobidobi - The Social Media You'll Ever Need{% endblock twitter_title %}" property="twitter:title">
+  <meta content="{% block twitter_description %}Wobidobi - The Social Media You'll Ever Need{% endblock twitter_description %}" property="twitter:description">
+  <meta content="{% block twitter_image %}https://uploads-ssl.webflow.com/62abc23e594f83b60b6b133d/62af4f42e7e7cffd6759ac29_writelogy-x-open-graph-webflow-template.png{% endblock twitter_image %}" property="twitter:image"> 
+  
   <meta property="og:type" content="website">
   <meta content="summary_large_image" name="twitter:card">
   <meta content="width=device-width, initial-scale=1" name="viewport">

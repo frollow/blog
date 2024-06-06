@@ -30,7 +30,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = "__all__"
-        exclude = ["author", "feature", "pub_date", "paid"]
+        exclude = ["author", "feature", "pub_date", "paid", "published"]
         widgets = {
             "title": forms.TextInput(
                 attrs={

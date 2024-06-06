@@ -28,6 +28,12 @@ class Social(models.Model):
         blank=True,
         null=True,
     )
+    nickname = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        verbose_name="Nickname",
+    )
     share_link = models.CharField(
         max_length=50,
         null=True,

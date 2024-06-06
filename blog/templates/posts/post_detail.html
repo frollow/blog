@@ -5,15 +5,21 @@
 
 {% load render_json_ld from json_ld %}
 
-{% block title %}{{ post.title|truncatewords:4 }}{% endblock %}
-{% block header %}
-{% endblock %}
+{% block title %}{{ post.title }} - Wobidobi.com{% endblock %}
+{% block description %}{{ post.short_text }}{% endblock %}
+
+{% block og_title %}{{ post.title }} - Wobidobi.com{% endblock %}
+{% block og_description %}{{ post.short_text }}{% endblock %}
+{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% thumbnail post.image "1024" crop="center" upscale=True as im %}{{ im.url }}{% endthumbnail %}{% endblock %}
+{% block twitter_title %}{{ post.title }} - Wobidobi.com{% endblock %}
+{% block twitter_description %}{{ post.short_text }}{% endblock %}
+{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}{% thumbnail post.image "1024" crop="center" upscale=True as im %}{{ im.url }}{% endthumbnail %}{% endblock %}
+
 
 {% block before_close_head %}
 {% render_json_ld sd %}
-
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v20.0&appId=594302567444248" nonce="Fmud3otZ"></script>
 {% endblock %}
-
 
 
 {% block content %}
