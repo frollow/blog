@@ -73,25 +73,25 @@ jobs:
           port: ${{ secrets.PROD_HOST_PORT }}
           envs: SECRET_KEY
           script: |
-            export SECRET_KEY=$SECRET_KEY
-            export ALLOWED_HOSTS=${{ secrets.PROD_ALLOWED_HOSTS }}
-            export INTERNAL_IPS=${{ secrets.PROD_INTERNAL_IPS }}
-            export RECAPTCHA_PUBLIC_KEY=${{ secrets.PROD_RECAPTCHA_PUBLIC_KEY }}
-            export RECAPTCHA_PRIVATE_KEY=${{ secrets.PROD_RECAPTCHA_PRIVATE_KEY }}
-            export OPENAI_API_KEY=${{ secrets.PROD_OPENAI_API_KEY }}
-            export DEBUG=${{ secrets.PROD_DEBUG }}
-            export DB_NAME=${{ secrets.PROD_DB_NAME }}
-            export DB_HOST=${{ secrets.PROD_DB_HOST }}
-            export POSTGRES_DB=${{ secrets.PROD_POSTGRES_DB }}
-            export POSTGRES_USER=${{ secrets.PROD_POSTGRES_USER }}
-            export POSTGRES_PASSWORD=${{ secrets.PROD_POSTGRES_PASSWORD }}
-            export DB_PORT=${{ secrets.PROD_DB_PORT }}
-            export CELERY_BROKER_URL=${{ secrets.PROD_CELERY_BROKER_URL }}
-            export CELERY_RESULT_BACKEND=${{ secrets.PROD_CELERY_RESULT_BACKEND }}
-            export CELERY_SINGLETON_BACKEND_URL=${{ secrets.PROD_CELERY_SINGLETON_BACKEND_URL }}
-            export DJANGO_SUPERUSER_USERNAME=${{ secrets.PROD_DJANGO_SUPERUSER_USERNAME }}
-            export DJANGO_SUPERUSER_PASSWORD=${{ secrets.PROD_DJANGO_SUPERUSER_PASSWORD }}
-            export DJANGO_SUPERUSER_EMAIL=${{ secrets.PROD_DJANGO_SUPERUSER_EMAIL }}
+            export SECRET_KEY="$SECRET_KEY"
+            export ALLOWED_HOSTS="${ALLOWED_HOSTS}"
+            export INTERNAL_IPS="${INTERNAL_IPS}"
+            export RECAPTCHA_PUBLIC_KEY="${RECAPTCHA_PUBLIC_KEY}"
+            export RECAPTCHA_PRIVATE_KEY="${RECAPTCHA_PRIVATE_KEY}"
+            export OPENAI_API_KEY="${OPENAI_API_KEY}"
+            export DEBUG="${DEBUG}"
+            export DB_NAME="${DB_NAME}"
+            export DB_HOST="${DB_HOST}"
+            export POSTGRES_DB="${POSTGRES_DB}"
+            export POSTGRES_USER="${POSTGRES_USER}"
+            export POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
+            export DB_PORT="${DB_PORT}"
+            export CELERY_BROKER_URL="${CELERY_BROKER_URL}"
+            export CELERY_RESULT_BACKEND="${CELERY_RESULT_BACKEND}"
+            export CELERY_SINGLETON_BACKEND_URL="${CELERY_SINGLETON_BACKEND_URL}"
+            export DJANGO_SUPERUSER_USERNAME="${DJANGO_SUPERUSER_USERNAME}"
+            export DJANGO_SUPERUSER_PASSWORD="${DJANGO_SUPERUSER_PASSWORD}"
+            export DJANGO_SUPERUSER_EMAIL="${DJANGO_SUPERUSER_EMAIL}"
 
 
   remove_old_docker_images:
