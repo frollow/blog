@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("auth/", include(("users.urls", "users"), namespace="users")),
     path("auth/", include("django.contrib.auth.urls")),
-    path("admin/", admin.site.urls),
+    path("admindd/", admin.site.urls),
     path("posts/", include(("posts.urls", "posts"), namespace="posts")),
     path("", include(("homepage.urls", "homepage"), namespace="homepage")),
     path("contacts/", include("contacts.urls", namespace="contacts")),
@@ -21,6 +21,11 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = "core.views.page_not_found"
 handler500 = "core.views.server_error"
 handler403 = "core.views.permission_denied"
+
+admin.site.site_header = "Wobidobi - Admin Panel"
+admin.site.site_title = "Wobidobi"
+admin.site.index_title = "Welcome to the Admin Interface!"
+
 
 if settings.DEBUG:
     import debug_toolbar
