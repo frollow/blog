@@ -66,14 +66,32 @@ jobs:
         uses: appleboy/ssh-action@master
         env:
           SECRET_KEY: ${{ secrets.PROD_SECRET_KEY }}
+          ALLOWED_HOSTS: ${{ secrets.PROD_ALLOWED_HOSTS }}
+          INTERNAL_IPS: ${{ secrets.PROD_INTERNAL_IPS }}
+          RECAPTCHA_PUBLIC_KEY: ${{ secrets.PROD_RECAPTCHA_PUBLIC_KEY }}
+          RECAPTCHA_PRIVATE_KEY: ${{ secrets.PROD_RECAPTCHA_PRIVATE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.PROD_OPENAI_API_KEY }}
+          DEBUG: ${{ secrets.PROD_DEBUG }}
+          DB_NAME: ${{ secrets.PROD_DB_NAME }}
+          DB_HOST: ${{ secrets.PROD_DB_HOST }}
+          POSTGRES_DB: ${{ secrets.PROD_POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.PROD_POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.PROD_POSTGRES_PASSWORD }}
+          DB_PORT: ${{ secrets.PROD_DB_PORT }}
+          CELERY_BROKER_URL: ${{ secrets.PROD_CELERY_BROKER_URL }}
+          CELERY_RESULT_BACKEND: ${{ secrets.PROD_CELERY_RESULT_BACKEND }}
+          CELERY_SINGLETON_BACKEND_URL: ${{ secrets.PROD_CELERY_SINGLETON_BACKEND_URL }}
+          DJANGO_SUPERUSER_USERNAME: ${{ secrets.PROD_DJANGO_SUPERUSER_USERNAME }}
+          DJANGO_SUPERUSER_PASSWORD: ${{ secrets.PROD_DJANGO_SUPERUSER_PASSWORD }}
+          DJANGO_SUPERUSER_EMAIL: ${{ secrets.PROD_DJANGO_SUPERUSER_EMAIL }}
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_HOST_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PROD_HOST_PORT }}
-          envs: SECRET_KEY
+          envs: SECRET_KEY,ALLOWED_HOSTS,INTERNAL_IPS,RECAPTCHA_PUBLIC_KEY,RECAPTCHA_PRIVATE_KEY,OPENAI_API_KEY,DEBUG,DB_NAME,DB_HOST,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,DB_PORT,CELERY_BROKER_URL,CELERY_RESULT_BACKEND,CELERY_SINGLETON_BACKEND_URL,DJANGO_SUPERUSER_USERNAME,DJANGO_SUPERUSER_PASSWORD,DJANGO_SUPERUSER_EMAIL
           script: |
-            export SECRET_KEY="$SECRET_KEY"
+            export SECRET_KEY="${SECRET_KEY}"
             export ALLOWED_HOSTS="${ALLOWED_HOSTS}"
             export INTERNAL_IPS="${INTERNAL_IPS}"
             export RECAPTCHA_PUBLIC_KEY="${RECAPTCHA_PUBLIC_KEY}"
