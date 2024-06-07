@@ -110,6 +110,12 @@ jobs:
             export DJANGO_SUPERUSER_USERNAME="${DJANGO_SUPERUSER_USERNAME}"
             export DJANGO_SUPERUSER_PASSWORD="${DJANGO_SUPERUSER_PASSWORD}"
             export DJANGO_SUPERUSER_EMAIL="${DJANGO_SUPERUSER_EMAIL}"
+            sudo docker-compose -f /opt/infra/docker-compose.yml rm django
+            sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
+            sudo docker-compose -f /opt/infra/docker-compose.yml pull django
+            sudo docker-compose -f /opt/infra/docker-compose.yml stop django
+            sudo docker-compose -f /opt/infra/docker-compose.yml up -d
+            sudo docker logout
 
 
   remove_old_docker_images:
