@@ -16,29 +16,31 @@ class Social(models.Model):
         "youtube": "",
         "linkedin": "",
     }
+    SITE_URLS = {
+        "facebook": "https://www.facebook.com/",
+        "instagram": "https://www.instagram.com/",
+        "x": "http://twitter.com/",
+        "youtube": "https://www.youtube.com/",
+        "linkedin": "https://www.linkedin.com/",
+    }
+    SITE_SHARE_LINKS = {
+        "facebook": "sharer/sharer.php?u=",
+        "instagram": "",
+        "x": "share?url=",
+        "youtube": "",
+        "linkedin": "shareArticle?mini=true&url=",
+    }
     site = models.CharField(
         max_length=20,
         choices=SITE_TYPE_VALUES,
         default="facebook",
         verbose_name="Site",
     )
-    url = models.URLField(
-        max_length=100,
-        verbose_name="URL",
-        blank=True,
-        null=True,
-    )
     nickname = models.CharField(
         max_length=100,
         null=True,
         blank=True,
         verbose_name="Nickname",
-    )
-    share_link = models.CharField(
-        max_length=50,
-        null=True,
-        blank=True,
-        verbose_name="Share link",
     )
     added_date = models.DateTimeField(
         "Creation date",
@@ -58,6 +60,14 @@ class Social(models.Model):
     def get_icon(self):
         """Returns the icon symbol for the site."""
         return self.SITE_ICONS.get(self.site, "")
+
+    def get_base_url(self):
+        """Returns the base URL for the site."""
+        return self.SITE_URLS.get(self.site, "")
+
+    def get_share_link(self):
+        """Returns the share link template for the site."""
+        return self.SITE_SHARE_LINKS.get(self.site, "")
 
     def __str__(self):
         return self.site

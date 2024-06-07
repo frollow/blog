@@ -1,0 +1,17 @@
+{% if type == 'share' %}
+  {% for link in social %}
+    {% if link.get_share_link %}
+      <a href="{{ link.get_base_url }}{{ link.get_share_link }}https://{{ request.get_host }}/{{ post.slug }}" class="social-icon-square no-bg w-inline-block">
+        <div class="social-icon-font">{{ link.get_icon }}</div>
+      </a>
+    {% endif %}
+  {% endfor %}
+{% elif type == 'profile' %}
+  {% for link in social %}
+    {% if link.nickname %}
+      <a href="{{ link.get_base_url }}{{ link.nickname }}" class="social-icon-square no-bg w-inline-block">
+        <div class="social-icon-font">{{ link.get_icon }}</div>
+      </a>
+    {% endif %}
+  {% endfor %}
+{% endif %}

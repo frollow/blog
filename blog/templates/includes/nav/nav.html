@@ -6,11 +6,7 @@
         <div class="header-middle social-media">
           <div>
             <div class="w-layout-grid social-media-grid-top header">
-              {% for link in social %}
-              <a href="{{link.url}}" class="social-icon-square no-bg w-inline-block">
-                <div class="social-icon-font">{{ link.get_icon }}</div>
-              </a>
-              {% endfor %}
+              {% include "includes/social_links.html" with type="profile" social=social %}
             </div>
           </div>
         </div>

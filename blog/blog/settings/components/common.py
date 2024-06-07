@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     "django_json_ld",
     "ckeditor",
     "ckeditor_uploader",
-    
+    "django_social_share",
 ]
 
 MIDDLEWARE = [

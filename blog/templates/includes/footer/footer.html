@@ -4,11 +4,7 @@
       <div class="inner-container _574px center">
         <div class="text-center">
           <div class="w-layout-grid social-media-grid-top center">
-            {% for link in social %}
-            <a href="{{link.url}}" class="social-icon-square no-bg w-inline-block">
-              <div class="social-icon-font">{{ link.get_icon }}</div>
-            </a>
-            {% endfor %}
+            {% include "includes/social_links.html" with type="profile" social=social %}
           </div>
         </div>
       </div>

@@ -75,13 +75,7 @@
           <div class="flex-horizontal space-between">
             <div class="text-200 bold color-neutral-800">Share with your friends</div>
             <div class="w-layout-grid social-media-grid-top right">
-              {% for link in social %}
-              {% if link.share_link %}
-                <a href="{{link.url}}{{link.share_link}}https://{{ request.get_host }}/{{ post.slug }}" class="social-icon-square no-bg w-inline-block">
-                  <div class="social-icon-font">{{ link.get_icon }}</div>
-                </a>
-              {% endif %}
-              {% endfor %}
+              {% include "includes/social_links.html" with type="share" social=social %}
             </div>
           </div>
         {% endif %}

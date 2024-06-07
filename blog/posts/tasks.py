@@ -73,7 +73,7 @@ def fetch_and_create_post():
 
         image_file = ContentFile(image_content, name=f"{slug}.png")
         author = User.objects.first()
-        group = Group.objects.get(id=2)
+        group = Group.objects.get(id=1)
 
         if not ProcessedLink.objects.filter(link=link).exists():
             try:
