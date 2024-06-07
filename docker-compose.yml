@@ -41,7 +41,8 @@ services:
         condition: service_healthy
 
   django:
-    build: ./blog
+    image: wobidobi/prod:latest
+    restart: always
     networks:
       - wobidobi-network
     volumes:
@@ -71,7 +72,6 @@ services:
       - ./configs:/etc/nginx/conf.d:ro
       - media_wobidobi:/var/www/media
       - static_wobidobi:/var/www/static
-      # - static_flower:/path/to/flower/static
     depends_on:
       django:
         condition: service_healthy
@@ -86,4 +86,3 @@ volumes:
   data_wobidobi:
   media_wobidobi:
   static_wobidobi:
-  # static_flower:
