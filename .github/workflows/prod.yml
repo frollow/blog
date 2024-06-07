@@ -92,7 +92,7 @@ jobs:
           envs: SECRET_KEY,ALLOWED_HOSTS,INTERNAL_IPS,RECAPTCHA_PUBLIC_KEY,RECAPTCHA_PRIVATE_KEY,OPENAI_API_KEY,DEBUG,DB_NAME,DB_HOST,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,DB_PORT,CELERY_BROKER_URL,CELERY_RESULT_BACKEND,CELERY_SINGLETON_BACKEND_URL,DJANGO_SUPERUSER_USERNAME,DJANGO_SUPERUSER_PASSWORD,DJANGO_SUPERUSER_EMAIL
           script: |
             sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
-            sudo docker-compose -f /opt/infra/docker-compose.yml up -d \
+            docker-compose -f /opt/infra/docker-compose.yml up -d \
               -e SECRET_KEY="${SECRET_KEY}" \
               -e ALLOWED_HOSTS="${ALLOWED_HOSTS}" \
               -e INTERNAL_IPS="${INTERNAL_IPS}" \
