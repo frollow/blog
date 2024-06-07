@@ -64,13 +64,16 @@ jobs:
     steps:
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
+        env:
+          SECRET_KEY: ${{ secrets.PROD_SECRET_KEY }}
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_HOST_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PROD_HOST_PORT }}
+          envs: SECRET_KEY
           script: |
-            export SECRET_KEY=${{ secrets.PROD_SECRET_KEY }}
+            export SECRET_KEY=$SECRET_KEY
             export ALLOWED_HOSTS=${{ secrets.PROD_ALLOWED_HOSTS }}
             export INTERNAL_IPS=${{ secrets.PROD_INTERNAL_IPS }}
             export RECAPTCHA_PUBLIC_KEY=${{ secrets.PROD_RECAPTCHA_PUBLIC_KEY }}
@@ -89,12 +92,7 @@ jobs:
             export DJANGO_SUPERUSER_USERNAME=${{ secrets.PROD_DJANGO_SUPERUSER_USERNAME }}
             export DJANGO_SUPERUSER_PASSWORD=${{ secrets.PROD_DJANGO_SUPERUSER_PASSWORD }}
             export DJANGO_SUPERUSER_EMAIL=${{ secrets.PROD_DJANGO_SUPERUSER_EMAIL }}
-            sudo docker-compose -f /opt/infra/docker-compose.yml rm django
-            sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
-            sudo docker-compose -f /opt/infra/docker-compose.yml pull django
-            sudo docker-compose -f /opt/infra/docker-compose.yml stop django
-            sudo docker-compose -f /opt/infra/docker-compose.yml up -d
-            sudo docker logout
+
 
   remove_old_docker_images:
     runs-on: ubuntu-latest
