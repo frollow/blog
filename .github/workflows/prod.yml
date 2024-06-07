@@ -52,5 +52,6 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_HOST_USER }}
           key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PROD_HOST_PORT }}
           script: |
             sudo docker image prune -a -f
