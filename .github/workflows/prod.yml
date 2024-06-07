@@ -91,31 +91,7 @@ jobs:
           port: ${{ secrets.PROD_HOST_PORT }}
           envs: SECRET_KEY,ALLOWED_HOSTS,INTERNAL_IPS,RECAPTCHA_PUBLIC_KEY,RECAPTCHA_PRIVATE_KEY,OPENAI_API_KEY,DEBUG,DB_NAME,DB_HOST,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,DB_PORT,CELERY_BROKER_URL,CELERY_RESULT_BACKEND,CELERY_SINGLETON_BACKEND_URL,DJANGO_SUPERUSER_USERNAME,DJANGO_SUPERUSER_PASSWORD,DJANGO_SUPERUSER_EMAIL
           script: |
-            export SECRET_KEY="${SECRET_KEY}"
-            export ALLOWED_HOSTS="${ALLOWED_HOSTS}"
-            export INTERNAL_IPS="${INTERNAL_IPS}"
-            export RECAPTCHA_PUBLIC_KEY="${RECAPTCHA_PUBLIC_KEY}"
-            export RECAPTCHA_PRIVATE_KEY="${RECAPTCHA_PRIVATE_KEY}"
-            export OPENAI_API_KEY="${OPENAI_API_KEY}"
-            export DEBUG="${DEBUG}"
-            export DB_NAME="${DB_NAME}"
-            export DB_HOST="${DB_HOST}"
-            export POSTGRES_DB="${POSTGRES_DB}"
-            export POSTGRES_USER="${POSTGRES_USER}"
-            export POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
-            export DB_PORT="${DB_PORT}"
-            export CELERY_BROKER_URL="${CELERY_BROKER_URL}"
-            export CELERY_RESULT_BACKEND="${CELERY_RESULT_BACKEND}"
-            export CELERY_SINGLETON_BACKEND_URL="${CELERY_SINGLETON_BACKEND_URL}"
-            export DJANGO_SUPERUSER_USERNAME="${DJANGO_SUPERUSER_USERNAME}"
-            export DJANGO_SUPERUSER_PASSWORD="${DJANGO_SUPERUSER_PASSWORD}"
-            export DJANGO_SUPERUSER_EMAIL="${DJANGO_SUPERUSER_EMAIL}"
-            sudo docker-compose -f /opt/infra/docker-compose.yml rm django
-            sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
-            sudo docker-compose -f /opt/infra/docker-compose.yml pull django
-            sudo docker-compose -f /opt/infra/docker-compose.yml stop django
-            sudo docker-compose -f /opt/infra/docker-compose.yml up -d
-            sudo docker logout
+            export ALLOWED_HOSTS="$ALLOWED_HOSTS"
 
 
   remove_old_docker_images:
