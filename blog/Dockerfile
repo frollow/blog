@@ -12,7 +12,6 @@ ENV DJANGO_SETTINGS_MODULE 'blog.settings'
 COPY run_uwsgi.sh run_uwsgi.sh
 COPY requirements.txt requirements.txt
 COPY uwsgi/uwsgi.ini uwsgi.ini
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN  mkdir -p /var/log/supervisord/ \
      && mkdir -p /var/www/static/ \
@@ -20,7 +19,7 @@ RUN  mkdir -p /var/log/supervisord/ \
      && mkdir -p /opt/app/static/ \
      && mkdir -p /opt/app/media/ \
      && apt-get update \
-     && apt-get install -y --no-install-recommends gettext supervisor \
+     && apt-get install -y --no-install-recommends gettext \
      && pip install --upgrade pip \
      && pip install -r requirements.txt
 
@@ -31,4 +30,4 @@ COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ENTRYPOINT ["./run_uwsgi.sh"]
