@@ -80,7 +80,6 @@ services:
 
 networks:
   wobidobi-network:
-    external: true
 
 volumes:
   data_wobidobi:
