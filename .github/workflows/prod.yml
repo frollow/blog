@@ -64,54 +64,38 @@ jobs:
     steps:
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
-        env:
-          SECRET_KEY: ${{ secrets.PROD_SECRET_KEY }}
-          ALLOWED_HOSTS: ${{ secrets.PROD_ALLOWED_HOSTS }}
-          INTERNAL_IPS: ${{ secrets.PROD_INTERNAL_IPS }}
-          RECAPTCHA_PUBLIC_KEY: ${{ secrets.PROD_RECAPTCHA_PUBLIC_KEY }}
-          RECAPTCHA_PRIVATE_KEY: ${{ secrets.PROD_RECAPTCHA_PRIVATE_KEY }}
-          OPENAI_API_KEY: ${{ secrets.PROD_OPENAI_API_KEY }}
-          DEBUG: ${{ secrets.PROD_DEBUG }}
-          DB_NAME: ${{ secrets.PROD_DB_NAME }}
-          DB_HOST: ${{ secrets.PROD_DB_HOST }}
-          POSTGRES_DB: ${{ secrets.PROD_POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.PROD_POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.PROD_POSTGRES_PASSWORD }}
-          DB_PORT: ${{ secrets.PROD_DB_PORT }}
-          CELERY_BROKER_URL: ${{ secrets.PROD_CELERY_BROKER_URL }}
-          CELERY_RESULT_BACKEND: ${{ secrets.PROD_CELERY_RESULT_BACKEND }}
-          CELERY_SINGLETON_BACKEND_URL: ${{ secrets.PROD_CELERY_SINGLETON_BACKEND_URL }}
-          DJANGO_SUPERUSER_USERNAME: ${{ secrets.PROD_DJANGO_SUPERUSER_USERNAME }}
-          DJANGO_SUPERUSER_PASSWORD: ${{ secrets.PROD_DJANGO_SUPERUSER_PASSWORD }}
-          DJANGO_SUPERUSER_EMAIL: ${{ secrets.PROD_DJANGO_SUPERUSER_EMAIL }}
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_HOST_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PROD_HOST_PORT }}
-          envs: SECRET_KEY,ALLOWED_HOSTS,INTERNAL_IPS,RECAPTCHA_PUBLIC_KEY,RECAPTCHA_PRIVATE_KEY,OPENAI_API_KEY,DEBUG,DB_NAME,DB_HOST,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,DB_PORT,CELERY_BROKER_URL,CELERY_RESULT_BACKEND,CELERY_SINGLETON_BACKEND_URL,DJANGO_SUPERUSER_USERNAME,DJANGO_SUPERUSER_PASSWORD,DJANGO_SUPERUSER_EMAIL
           script: |
+            echo "Creating .env file on server"
+            cat <<EOF > /opt/infra/.env
+            SECRET_KEY=${{ secrets.PROD_SECRET_KEY }}
+            ALLOWED_HOSTS=${{ secrets.PROD_ALLOWED_HOSTS }}
+            INTERNAL_IPS=${{ secrets.PROD_INTERNAL_IPS }}
+            RECAPTCHA_PUBLIC_KEY=${{ secrets.PROD_RECAPTCHA_PUBLIC_KEY }}
+            RECAPTCHA_PRIVATE_KEY=${{ secrets.PROD_RECAPTCHA_PRIVATE_KEY }}
+            OPENAI_API_KEY=${{ secrets.PROD_OPENAI_API_KEY }}
+            DEBUG=${{ secrets.PROD_DEBUG }}
+            DB_NAME=${{ secrets.PROD_DB_NAME }}
+            DB_HOST=${{ secrets.PROD_DB_HOST }}
+            POSTGRES_DB=${{ secrets.PROD_POSTGRES_DB }}
+            POSTGRES_USER=${{ secrets.PROD_POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.PROD_POSTGRES_PASSWORD }}
+            DB_PORT=${{ secrets.PROD_DB_PORT }}
+            CELERY_BROKER_URL=${{ secrets.PROD_CELERY_BROKER_URL }}
+            CELERY_RESULT_BACKEND=${{ secrets.PROD_CELERY_RESULT_BACKEND }}
+            CELERY_SINGLETON_BACKEND_URL=${{ secrets.PROD_CELERY_SINGLETON_BACKEND_URL }}
+            DJANGO_SUPERUSER_USERNAME=${{ secrets.PROD_DJANGO_SUPERUSER_USERNAME }}
+            DJANGO_SUPERUSER_PASSWORD=${{ secrets.PROD_DJANGO_SUPERUSER_PASSWORD }}
+            DJANGO_SUPERUSER_EMAIL=${{ secrets.PROD_DJANGO_SUPERUSER_EMAIL }}
+            EOF
+
+            echo "Starting Docker Compose"
             sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
-            docker-compose -f /opt/infra/docker-compose.yml up -d \
-              -e SECRET_KEY="${SECRET_KEY}" \
-              -e ALLOWED_HOSTS="${ALLOWED_HOSTS}" \
-              -e INTERNAL_IPS="${INTERNAL_IPS}" \
-              -e RECAPTCHA_PUBLIC_KEY="${RECAPTCHA_PUBLIC_KEY}" \
-              -e RECAPTCHA_PRIVATE_KEY="${RECAPTCHA_PRIVATE_KEY}" \
-              -e OPENAI_API_KEY="${OPENAI_API_KEY}" \
-              -e DEBUG="${DEBUG}" \
-              -e DB_NAME="${DB_NAME}" \
-              -e DB_HOST="${DB_HOST}" \
-              -e POSTGRES_DB="${POSTGRES_DB}" \
-              -e POSTGRES_USER="${POSTGRES_USER}" \
-              -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
-              -e DB_PORT="${DB_PORT}" \
-              -e CELERY_BROKER_URL="${CELERY_BROKER_URL}" \
-              -e CELERY_RESULT_BACKEND="${CELERY_RESULT_BACKEND}" \
-              -e CELERY_SINGLETON_BACKEND_URL="${CELERY_SINGLETON_BACKEND_URL}" \
-              -e DJANGO_SUPERUSER_USERNAME="${DJANGO_SUPERUSER_USERNAME}" \
-              -e DJANGO_SUPERUSER_PASSWORD="${DJANGO_SUPERUSER_PASSWORD}" \
-              -e DJANGO_SUPERUSER_EMAIL="${DJANGO_SUPERUSER_EMAIL}"
+            sudo docker-compose -f /opt/infra/docker-compose.yml up -d
             sudo docker logout
 
 

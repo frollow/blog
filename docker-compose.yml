@@ -7,13 +7,8 @@ services:
     volumes:
       - data_wobidobi:/var/lib/postgresql/data
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
+    env_file:
+      - ./.env
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
@@ -37,8 +32,8 @@ services:
     networks:
       - wobidobi-network
     environment:
-      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
-      FLOWER_PORT: 5555
+    - CELERY_BROKER_URL=redis://redis:6379/0
+    - FLOWER_PORT=5555
     expose:
       - 5555
     depends_on:
@@ -55,26 +50,8 @@ services:
       - static_wobidobi:/var/www/static
     expose:
       - "8000"
-    environment:
-      SECRET_KEY: ${SECRET_KEY}
-      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
-      INTERNAL_IPS: ${INTERNAL_IPS}
-      RECAPTCHA_PUBLIC_KEY: ${RECAPTCHA_PUBLIC_KEY}
-      RECAPTCHA_PRIVATE_KEY: ${RECAPTCHA_PRIVATE_KEY}
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      DEBUG: ${DEBUG}
-      DB_NAME: ${DB_NAME}
-      DB_HOST: ${DB_HOST}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_PORT: ${DB_PORT}
-      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
-      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
-      CELERY_SINGLETON_BACKEND_URL: ${CELERY_SINGLETON_BACKEND_URL}
-      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
-      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
-      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
+    env_file:
+      - ./.env
     depends_on:
       db:
         condition: service_healthy
