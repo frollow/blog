@@ -1,20 +1,5 @@
 version: "3.3"
-services:
-  db:
-    image: postgres:16.2-alpine
-    networks:
-      - wobidobi-network
-    volumes:
-      - data_wobidobi:/var/lib/postgresql/data
-      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
-    env_file:
-      - ./.env
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 10s
-      timeout: 3s
-      retries: 3
-  
+services:  
   redis:
     image: redis:latest
     networks:
@@ -41,6 +26,7 @@ services:
         condition: service_healthy
 
   django:
+    # build: ./blog
     image: wobidobi/prod:latest
     restart: always
     networks:
@@ -53,8 +39,6 @@ services:
     env_file:
       - ./.env
     depends_on:
-      db:
-        condition: service_healthy
       redis:
         condition: service_healthy
     healthcheck:
@@ -82,6 +66,5 @@ networks:
   wobidobi-network:
 
 volumes:
-  data_wobidobi:
   media_wobidobi:
   static_wobidobi:
