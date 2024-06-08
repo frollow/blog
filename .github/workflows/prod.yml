@@ -72,6 +72,7 @@ jobs:
           script: |
             echo "Creating .env file on server"
             cat <<EOF > /opt/infra/.env
+            DJANGO_ENV=production
             SECRET_KEY=${{ secrets.PROD_SECRET_KEY }}
             ALLOWED_HOSTS=${{ secrets.PROD_ALLOWED_HOSTS }}
             INTERNAL_IPS=${{ secrets.PROD_INTERNAL_IPS }}
