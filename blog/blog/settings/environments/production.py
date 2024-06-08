@@ -1,0 +1,2 @@
+# common.py
+DEBUG = True

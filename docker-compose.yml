@@ -24,7 +24,7 @@ services:
   django:
     # build: ./blog
     image: wobidobi/prod:latest
-    restart: always
+    # restart: always
     volumes:
       - media_wobidobi:/var/www/media
       - static_wobidobi:/var/www/static
