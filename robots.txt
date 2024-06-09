@@ -1,0 +1,28 @@
+Sitemap: https://wobidobi.com/sitemap.xml
+
+User-Agent: *
+Disallow: /admin*
+Disallow: /auth*
+Disallow: /posts/create/
+Disallow: *utm_
+Disallow: *search
+Disallow: *page=
+
+User-agent: Yandex
+Disallow: /admin*
+Disallow: /auth*
+Disallow: /posts/create/
+Disallow: *utm_
+Disallow: *search
+Disallow: *page=
+Clean-Param: yclid&gclid&utm_source&utm_medium&utm_campaign&utm_term&utm_content&_openstat&clid&from&roistat_visit&fbclid
+
+User-agent: Googlebot
+Disallow: /admin*
+Disallow: /auth*
+Disallow: /posts/create/
+Disallow: *utm_
+Disallow: *search
+Disallow: *page=
+Allow: *.css
+Allow: *.js
