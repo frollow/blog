@@ -2,6 +2,7 @@ version: "3.3"
 services:  
   redis:
     image: redis:latest
+    container_name: wd-redis
     expose:
       - "6379"
     healthcheck:
@@ -12,6 +13,7 @@ services:
   
   flower:
     image: mher/flower
+    container_name: wd-flower
     environment:
     - CELERY_BROKER_URL=redis://redis:6379/0
     - FLOWER_PORT=5555
@@ -22,9 +24,9 @@ services:
         condition: service_healthy
 
   django:
-    # build: ./blog
     image: wobidobi/prod:latest
-    # restart: always
+    container_name: wd-django
+    restart: always
     volumes:
       - media_wobidobi:/var/www/media
       - static_wobidobi:/var/www/static
@@ -43,6 +45,7 @@ services:
 
   nginx:
     image: nginx:latest
+    container_name: wd-nginx
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./configs:/etc/nginx/conf.d:ro
@@ -54,6 +57,7 @@ services:
         # condition: service_healthy
     ports:
       - "80:80"
+      - "443:443"
 
 volumes:
   media_wobidobi:
