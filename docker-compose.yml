@@ -28,7 +28,6 @@ services:
     volumes:
       - media_wobidobi:/var/www/media
       - static_wobidobi:/var/www/static
-      - /opt/infra/:/opt/infra/
     env_file:
       - ./.env
     expose:

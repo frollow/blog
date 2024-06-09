@@ -8,6 +8,7 @@ ENV UWSGI_PROCESSES 1
 ENV UWSGI_THREADS 16
 ENV UWSGI_HARAKIRI 240
 ENV DJANGO_SETTINGS_MODULE 'blog.settings'
+ENV PGSSLCERT /tmp/postgresql.crt
 
 COPY run_uwsgi.sh run_uwsgi.sh
 COPY requirements.txt requirements.txt
