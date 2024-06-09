@@ -1,2 +1,2 @@
 # common.py
-DEBUG = True
+DEBUG = False
