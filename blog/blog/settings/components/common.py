@@ -20,14 +20,20 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 
 allowed_hosts_env = os.getenv("ALLOWED_HOSTS", "127.0.0.1")
-internal_hosts_env = os.getenv("INTERNAL_IPS", "127.0.0.1")
 ALLOWED_HOSTS = allowed_hosts_env.split(",")
+
+internal_hosts_env = os.getenv("INTERNAL_IPS", "127.0.0.1")
 INTERNAL_IPS = internal_hosts_env.split(",")
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8080",
-]
+cors_allowed_origins_env = os.getenv("CORS_ALLOWED_ORIGINS", "http://127.0.0.1:8080")
+CORS_ALLOWED_ORIGINS = cors_allowed_origins_env.split(",")
+
+# CSRF Settings
+csrf_trusted_origins_env = os.getenv("CSRF_TRUSTED_ORIGINS", "http://127.0.0.1:8080")
+CSRF_TRUSTED_ORIGINS = csrf_trusted_origins_env.split(",")
+CSRF_COOKIE_SECURE = True
 CSRF_FAILURE_VIEW = "core.views.csrf_failure"
+
 
 ROOT_URLCONF = "blog.urls"
 WSGI_APPLICATION = "blog.wsgi.application"
