@@ -96,8 +96,11 @@ jobs:
             DJANGO_SUPERUSER_EMAIL=${{ secrets.PROD_DJANGO_SUPERUSER_EMAIL }}
             EOF
             echo "Starting Docker Compose"
+            sudo docker-compose -f /opt/infra/docker-compose.yml rm django
             sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
-            sudo docker compose -f /opt/infra/docker-compose.yml up -d
+            sudo docker compose -f /opt/infra/docker-compose.yml pull django
+            sudo docker compose -f /opt/infra/docker-compose.yml stop django
+            sudo docker compose -f /opt/infra/docker-compose.yml up -d django
             sudo docker logout
 
 
