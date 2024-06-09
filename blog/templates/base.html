@@ -41,8 +41,8 @@
         "url": "https://wobidobi.com/",
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "{{ request.scheme }}://{{ request.get_host }}{% url 'search:search' %}?&q={query}",
-          "query": "required"
+          "target": "{{ request.scheme }}://{{ request.get_host }}{% url 'search:search' %}?&q={query-input}",
+          "query-input": "required"
         }
     }
   </script>
