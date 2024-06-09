@@ -3,7 +3,7 @@
 
 <div id="w-node-_79784bda-7807-708e-c89b-c286c2c65d0f-c2c65d0f" data-w-id="79784bda-7807-708e-c89b-c286c2c65d0f" class="sidebar">
     <a href="/" class="logo-sidebar w-inline-block">
-        <img src="{% static 'images/logo.svg' %}" alt="Evoverse - Logo">
+        <img src="{% static 'images/logo.svg' %}" alt="Wobidobi - Logo">
     </a>
     {% if show == no %}
         <p class="mg-bottom-24px">Search our blog for articles and insights right here, just type your interest and dive into a world of knowledge.</p>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
                     {% thumbnail random_post.image "314x314" crop="center" upscale=True as im %}
-                        <img src="{{ im.url }}" class="blog-card-bg-image">
+                        <img src="{{ im.url }}" loading="lazy" class="blog-card-bg-image">
                     {% endthumbnail %}
                 </a>
             </div>
@@ -46,9 +46,9 @@
             <div role="listitem" class="w-dyn-item">
                 <a href="{% url 'posts:post_detail' post.slug%}" class="blog-card-featured-wrapper w-inline-block">
                     <div data-w-id="79784bda-7807-708e-c89b-c286c2c65d32" class="w-layout-grid grid-2-columns blog-card-primary sidebar">
-                        {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
+                        {% thumbnail post.image "135x135" crop="center" upscale=True as im %}
                         <div class="blog-card-image-wrapper sidebar">
-                            <img src="{{ im.url }}" alt="" class="blog-card-image">
+                            <img src="{{ im.url }}" loading="lazy" alt="{{post.title}}" class="blog-card-image">
                         </div>
                         {% endthumbnail %}
                         <div>

@@ -45,7 +45,7 @@
                                             <div class="author-container">
                                                 {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
                                                 <div class="avatar-circle _01 blog-card-bg-author-image">
-                                                    <img src="{{ im.url }}" loading="eager" alt="{{post.author.first_name}} {{post.author.last_name}}">
+                                                    <img src="{{ im.url }}" loading="lazy" alt="{{post.author.first_name}} {{post.author.last_name}}">
                                                 </div>
                                                 {% endthumbnail %}
                                                 <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>
