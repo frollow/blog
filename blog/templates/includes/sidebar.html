@@ -32,7 +32,7 @@
                     </div>
                     <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
                     {% thumbnail random_post.image "314x314" crop="center" upscale=True as im %}
-                        <img src="{{ im.url }}" loading="lazy" class="blog-card-bg-image">
+                        <img src="{{ im.url }}" alt="{{random_post.title}}" loading="lazy" class="blog-card-bg-image">
                     {% endthumbnail %}
                 </a>
             </div>

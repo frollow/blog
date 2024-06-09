@@ -24,7 +24,7 @@
                                     <div class="author-container">
                                         <div class="avatar-circle _01 blog-card-bg-author-image">
                                             {% thumbnail post.author.user_profile.image "500x500" crop="center" upscale=True as im %}
-                                            <img src="{{ im.url }}" loading="lazy" alt="{{post.title}}">
+                                            <img src="{{ im.url }}" loading="lazy" alt="{{post.author.first_name}} {{post.author.last_name}}">
                                             {% endthumbnail %}
                                         </div>
                                         <div class="text-100 bold color-neutral-100">{{post.author.first_name}} {{post.author.last_name}}</div>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
                             {% thumbnail post.image "698x526" crop="center" upscale=True as im %}
-                            <img src="{{ im.url }}" class="blog-card-bg-image">
+                            <img src="{{ im.url }}" alt="{{post.title}}" class="blog-card-bg-image">
                             {% endthumbnail %}
                         </a>
                     </div>
