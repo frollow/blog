@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 from sorl.thumbnail import get_thumbnail
 
 from .validators import (
@@ -74,6 +75,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text[:15]
+
+    def get_absolute_url(self):
+        return reverse("posts:post_detail", args=[str(self.slug)])
 
     def save(self, *args, **kwargs):
         # Set pub_date if not added in post

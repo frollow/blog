@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "capture_tag",
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [

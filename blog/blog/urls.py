@@ -1,9 +1,19 @@
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from django.conf import settings
 from django.conf.urls.static import static
 
+from posts.sitemaps import PostSitemap
+from contacts.sitemaps import ContactSitemap
+from homepage.sitemaps import MainSitemap
+
+sitemaps = {
+    "main": MainSitemap,
+    "posts": PostSitemap,
+    "contacts": ContactSitemap,
+}
 
 urlpatterns = [
     path("auth/", include(("users.urls", "users"), namespace="users")),
@@ -14,6 +24,12 @@ urlpatterns = [
     path("contacts/", include("contacts.urls", namespace="contacts")),
     path("search", include("search.urls", namespace="search")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
