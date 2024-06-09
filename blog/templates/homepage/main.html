@@ -19,12 +19,12 @@
                                 <div class="blog-card-bg-badge-wrapper">
                                     <div class="badge-primary small white">{{post.group}}</div>
                                 </div>
-                                <h2 class="display-4 blog-bg-title">{{post.title}}</h2>
+                                <h1 class="display-4 blog-bg-title">{{post.title}}</h1>
                                 <div class="blog-card-details-container">
                                     <div class="author-container">
                                         <div class="avatar-circle _01 blog-card-bg-author-image">
                                             {% thumbnail post.author.user_profile.image "500x500" crop="center" upscale=True as im %}
-                                            <img src="{{ im.url }}" loading="eager" alt="">
+                                            <img src="{{ im.url }}" loading="eager" alt="{{post.title}}">
                                             {% endthumbnail %}
                                         </div>
                                         <div class="text-100 bold color-neutral-100">{{post.author.first_name}} {{post.author.last_name}}</div>
@@ -50,7 +50,7 @@
                     <div role="listitem" class="blog-card-heading-wrapper w-dyn-item">
                         <a href="{% url 'posts:post_detail' post.slug%}" class="blog-card-heading w-inline-block">
                             <div class="text-200 bold text-uppercase color-neutral-600">{{ post.group }}</div>
-                            <h3 class="mg-top-12px mg-bottom-0">{{ post.title }}</h3>
+                            <p class="mg-top-12px mg-bottom-0">{{ post.title }}</p>
                         </a>
                     </div>
                     {% endfor %}
@@ -73,7 +73,7 @@
                                 <div data-w-id="18179618-f4f1-bf64-3fac-c197bb5b10da" class="w-layout-grid grid-2-columns blog-card-primary">
                                     {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
                                     <div class="blog-card-image-wrapper featured-v1">
-                                        <img src="{{ im.url }}" alt="" class="blog-card-image featured-v1">
+                                        <img src="{{ im.url }}" alt="{{post.title}}" class="blog-card-image featured-v1">
                                     </div>
                                     {% endthumbnail %}
                                     <div class="blog-card-content-default">
@@ -86,7 +86,7 @@
                                             <div class="author-container">
                                                 {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
                                                 <div class="avatar-circle _01 blog-card-bg-author-image">
-                                                    <img src="{{ im.url }}" loading="eager" alt="">
+                                                    <img src="{{ im.url }}" loading="eager" alt="{{post.author.first_name}} {{post.author.last_name}}">
                                                 </div>
                                                 {% endthumbnail %}
                                                 <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>

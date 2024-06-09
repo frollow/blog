@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = csrf_trusted_origins_env.split(",")
 CSRF_COOKIE_SECURE = True
 CSRF_FAILURE_VIEW = "core.views.csrf_failure"
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ROOT_URLCONF = "blog.urls"
 WSGI_APPLICATION = "blog.wsgi.application"

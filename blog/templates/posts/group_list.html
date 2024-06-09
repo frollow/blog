@@ -23,7 +23,7 @@
                                 <div data-w-id="18179618-f4f1-bf64-3fac-c197bb5b10da" class="w-layout-grid grid-2-columns blog-card-primary">
                                     {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
                                     <div class="blog-card-image-wrapper featured-v1">
-                                        <img src="{{ im.url }}" alt="" class="blog-card-image featured-v1">
+                                        <img src="{{ im.url }}" alt="{{post.title}}" class="blog-card-image featured-v1">
                                     </div>
                                     {% endthumbnail %}
                                     <div class="blog-card-content-default">
@@ -36,7 +36,7 @@
                                             <div class="author-container">
                                                 {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
                                                 <div class="avatar-circle _01 blog-card-bg-author-image">
-                                                    <img src="{{ im.url }}" loading="eager" alt="">
+                                                    <img src="{{ im.url }}" loading="eager" alt="{{post.author.first_name}} {{post.author.last_name}}">
                                                 </div>
                                                 {% endthumbnail %}
                                                 <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>
