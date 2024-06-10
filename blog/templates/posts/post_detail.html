@@ -7,7 +7,7 @@
 
 {% block title %}{{ post.title }} - Wobidobi.com{% endblock %}
 {% block description %}{{ post.short_text }}{% endblock %}
-{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% thumbnail post.image "1024" crop="center" upscale=True as im %}{{ im.url }}{% endthumbnail %}{% endblock %}
+{% block og_image %}{% thumbnail post.image "1024" crop="center" upscale=True as im %}{{ im.url }}{% endthumbnail %}{% endblock %}
 
 
 {% block before_close_head %}

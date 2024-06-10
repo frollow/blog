@@ -41,9 +41,6 @@ WSGI_APPLICATION = "blog.wsgi.application"
 
 # Fixed parameters
 POSTS_FOR_PAGINATION = 10
-THUMBNAIL_FORMAT = "WEBP"
-THUMBNAIL_CACHE_TIMEOUT = 600
-THUMBNAIL_QUALITY = 85
 
 
 INSTALLED_APPS = [
@@ -68,9 +65,11 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "capture_tag",
     "django.contrib.sitemaps",
+    "storages",
 ]
 
 MIDDLEWARE = [
+    "django.middleware.gzip.GZipMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
