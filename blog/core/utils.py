@@ -4,3 +4,11 @@ def rename_img_path_to_slug(path):
         extension = filename.split(".")[-1]
         return f"{path}/{self.slug}.{extension}"
     return wrapper
+
+
+# Rename image name to username
+def rename_img_path_to_username(path):
+    def wrapper(self, filename):
+        extension = filename.split(".")[-1]
+        return f"{path}/{self.user.username}.{extension}"
+    return wrapper

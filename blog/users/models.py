@@ -1,4 +1,4 @@
-from core.utils import rename_img_path_to_slug
+from core.utils import rename_img_path_to_username
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -40,7 +40,7 @@ class UserProfile(models.Model):
         User, on_delete=models.CASCADE, related_name="user_profile"
     )
     image = models.ImageField(
-        upload_to=rename_img_path_to_slug("users/photo"), blank=True
+        upload_to=rename_img_path_to_username("users/photo"), blank=True
     )
 
     def __str__(self):
