@@ -42,7 +42,8 @@ To get a local copy up and running, follow these simple steps.
 3. Setup your local environment:
    ```sh
    cp .env.example .env
-   # Edit .env file with your settings
+   mv /blog/settings/environments/local.py.template /blog/settings/environments/local.py
+   # Edit .env and local.py files with your settings
    ```
 4. Migrate the database:
    ```sh
