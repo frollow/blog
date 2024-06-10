@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from sorl.thumbnail import get_thumbnail
+from core.utils import rename_img_path_to_slug
 
 from .validators import (
     validate_file_extension,
@@ -49,7 +50,7 @@ class Post(models.Model):
     )
     image = models.ImageField(
         "Image",
-        upload_to="posts/",
+        upload_to=rename_img_path_to_slug("posts/images"),
         validators=[validate_image_size, validate_file_extension],
     )
     feature = models.BooleanField(verbose_name="Feature", default=False)

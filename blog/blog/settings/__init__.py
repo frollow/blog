@@ -20,6 +20,7 @@ ENV = environ.get("DJANGO_ENV") or "development"
 base_settings = [
     "components/common.py",  # standard django settings
     "components/database.py",
+    "components/thumbnail.py",
     "components/templates.py",
     "components/internationalization.py",
     "components/static.py",
