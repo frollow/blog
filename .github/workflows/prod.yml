@@ -55,24 +55,8 @@ jobs:
           username: ${{ secrets.PROD_HOST_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PROD_HOST_PORT }}
-          source: "docker-compose.yml,nginx.conf,configs/site.conf"
+          source: "docker-compose.yml,robots.txt,ads.txt,nginx.conf,configs/site.conf"
           target: "/opt/infra/"
-    
-  copy_other_files:
-    name: SCP files to server
-    runs-on: ubuntu-latest
-    needs: build_and_push_to_docker_hub
-    steps:
-      - uses: actions/checkout@master
-      - name: copy file via ssh password
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.PROD_HOST_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PROD_HOST_PORT }}
-          source: "robots.txt,ads.txt"
-          target: "/var/www/"
 
   deploy:
     runs-on: ubuntu-latest

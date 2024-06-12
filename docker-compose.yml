@@ -52,6 +52,8 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./configs:/etc/nginx/conf.d:ro
+      - ./ads.txt:/opt/ads.txt:ro
+      - ./robots.txt:/opt/robots.txt:ro
       - /etc/ssl/:/etc/ssl/
       - media_wobidobi:/var/www/media
       - static_wobidobi:/var/www/static
