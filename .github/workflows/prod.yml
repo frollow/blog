@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.PROD_HOST_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PROD_HOST_PORT }}
-          source: "docker-compose.yml,robots.txt,nginx.conf,configs/site.conf"
+          source: "docker-compose.yml,robots.txt,ads.txt,nginx.conf,configs/site.conf"
           target: "/opt/infra/"
 
   deploy:
