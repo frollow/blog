@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
-{% block title %}Profile {{ author.get_full_name }} {% endblock %}
+{% block title %}{{"Profile " | add:author.get_full_name |add:" - Wobidobi.com" | truncatechars:50}}{% endblock %}
 {% block description %}Explore personal profiles, connect with friends, and share your own stories on Wobidobi.com. Dive into a world of engaging content and social interaction!{% endblock %}
 
 {% block content %}
