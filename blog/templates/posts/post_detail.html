@@ -5,8 +5,8 @@
 
 {% load render_json_ld from json_ld %}
 
-{% block title %}{{ post.title }} - Wobidobi.com{% endblock %}
-{% block description %}{{ post.short_text }}{% endblock %}
+{% block title %}{{ post.title |add:" - Wobidobi.com" | truncatechars:50}}{% endblock %}
+{% block description %}{{ post.short_text|truncatechars:120 }}{% endblock %}
 {% block og_image %}{% thumbnail post.image "1024" crop="center" upscale=True as im %}{{ im.url }}{% endthumbnail %}{% endblock %}
 
 
@@ -34,7 +34,7 @@
             <div class="avatar-circle _01 blog-card-bg-author-image">
               {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
                 <div class="avatar-circle _01 blog-card-bg-author-image">
-                    <img src="{{ im.url }}" loading="eager">
+                    <img src="{{ im.url }}" alt="{{post.author.first_name}} {{post.author.last_name}}" loading="lazy">
                 </div>
               {% endthumbnail %}
             </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="bg-overlay-gradient blog-card-bg-overlay"></div>
             {% thumbnail post.image "314x314" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" class="blog-card-bg-image">
+              <img src="{{ im.url }}" alt="{{post.title}}" class="blog-card-bg-image">
             {% endthumbnail %}
           </a>
         </div>

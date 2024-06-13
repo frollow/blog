@@ -4,8 +4,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from django.template.loader import render_to_string
-
-from .models import Post
+from django.utils.timezone import localtime
 
 logger = logging.getLogger("posts")
 
@@ -75,10 +74,10 @@ def clean_html(html_content):
     return str(soup)
 
 
-def generate_unique_slug(title, max_attempts=10):
+def generate_unique_slug(model_class, title, max_attempts=10):
     slug = re.sub(r"\W+", "-", title.lower()).strip("-")
     for attempt in range(max_attempts):
-        if not Post.objects.filter(slug=slug).exists():
+        if not model_class.objects.filter(slug=slug).exists():
             return slug
         slug = f"{slug}-{attempt + 1}"
     raise ValueError(f"Unable to generate a unique slug for title: {title}")
@@ -104,3 +103,10 @@ def insert_advertisement(text, template: str):
 
     # Return the modified HTML as a string
     return str(soup)
+
+
+def format_datetime_to_iso(datetime_field):
+    formatted_date = localtime(datetime_field).strftime('%Y-%m-%dT%H:%M:%S%z')
+    # ISO 8601 convert "+0000" в "+00:00"
+    formatted_date = formatted_date[:-2] + ':' + formatted_date[-2:]
+    return formatted_date

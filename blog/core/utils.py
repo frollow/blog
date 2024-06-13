@@ -1,14 +1,23 @@
+from django.utils.deconstruct import deconstructible
+
+
 # Rename image name to slug
-def rename_img_path_to_slug(path):
-    def wrapper(self, filename):
+@deconstructible
+class RenameImgPathToSlug:
+    def __init__(self, path):
+        self.path = path
+
+    def __call__(self, instance, filename):
         extension = filename.split(".")[-1]
-        return f"{path}/{self.slug}.{extension}"
-    return wrapper
+        return f"{self.path}/{instance.slug}.{extension}"
 
 
 # Rename image name to username
-def rename_img_path_to_username(path):
-    def wrapper(self, filename):
+@deconstructible
+class RenameImgPathToUsername:
+    def __init__(self, path):
+        self.path = path
+
+    def __call__(self, instance, filename):
         extension = filename.split(".")[-1]
-        return f"{path}/{self.user.username}.{extension}"
-    return wrapper
+        return f"{self.path}/{instance.user.username}.{extension}"

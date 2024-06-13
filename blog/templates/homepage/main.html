@@ -2,11 +2,16 @@
 {% load thumbnail %}
 {% block wf_page_id %}66347d9e6fab56ada53cc375{% endblock wf_page_id %}
 
-{% block title %}Stay Updated with Wobidobi.com - Your Source for Latest News and Personal Blogs{% endblock %}
-{% block description %}Discover the latest news, trending stories, and engaging personal blogs on Wobidobi.com. Stay informed and entertained with diverse content from around the world. Join the Wobidobi community today!{% endblock %}
+{% block title %}Wobidobi News: Latest Updates, Breaking Stories, and In-Depth Coverage{% endblock %}
+{% block description %}Stay updated with Wobidobi News. Get the latest updates, breaking stories, and in-depth coverage with exclusive videos and photos.{% endblock %}
 
 
 {% block content %}
+<div class="section hero-home">
+    <div class="container-default w-container">
+        <h1 class="display-3 text-center color-neutral-100">Top Stories, Trending News, and Exclusive Insights</h1>
+    </div>
+</div>
 <div class="section hero-home">
     <div class="container-default w-container">
         <div data-w-id="fea615bd-a7aa-4dbf-804a-b131c9f91c7e" style="opacity:0" class="w-layout-grid grid-2-columns hero-top">
@@ -19,7 +24,7 @@
                                 <div class="blog-card-bg-badge-wrapper">
                                     <div class="badge-primary small white">{{post.group}}</div>
                                 </div>
-                                <h1 class="display-4 blog-bg-title">{{post.title}}</h1>
+                                <h2 class="display-4 blog-bg-title">{{post.title}}</h2>
                                 <div class="blog-card-details-container">
                                     <div class="author-container">
                                         <div class="avatar-circle _01 blog-card-bg-author-image">
@@ -86,7 +91,7 @@
                                             <div class="author-container">
                                                 {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
                                                 <div class="avatar-circle _01 blog-card-bg-author-image">
-                                                    <img src="{{ im.url }}" loading="eager" alt="{{post.author.first_name}} {{post.author.last_name}}">
+                                                    <img src="{{ im.url }}" loading="lazy" alt="{{post.author.first_name}} {{post.author.last_name}}">
                                                 </div>
                                                 {% endthumbnail %}
                                                 <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>

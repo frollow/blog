@@ -3,7 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from sorl.thumbnail import get_thumbnail
-from core.utils import rename_img_path_to_slug
+from core.utils import RenameImgPathToSlug
+from .utils import format_datetime_to_iso
 
 from .validators import (
     validate_file_extension,
@@ -50,7 +51,7 @@ class Post(models.Model):
     )
     image = models.ImageField(
         "Image",
-        upload_to=rename_img_path_to_slug("posts/images"),
+        upload_to=RenameImgPathToSlug("posts/images"),
         validators=[validate_image_size, validate_file_extension],
     )
     feature = models.BooleanField(verbose_name="Feature", default=False)
@@ -111,8 +112,8 @@ class Post(models.Model):
             "mainEntityOfPage": self.slug,
             "articleBody": self.text,
             "image": image_url,
-            "datePublished": self.pub_date.isoformat() if self.pub_date else "",
-            "dateModified": self.last_modified_date.isoformat()
+            "datePublished": format_datetime_to_iso(self.pub_date) if self.pub_date else "",
+            "dateModified": format_datetime_to_iso(self.last_modified_date)
             if self.last_modified_date
             else "",
             "author": {
@@ -135,9 +136,26 @@ class Group(models.Model):
         verbose_name="Slug",
     )
     description = models.TextField(verbose_name="Group description")
+    added_date = models.DateTimeField(
+        "Creation date",
+        auto_now_add=True,
+        null=True,
+        blank=True,
+        db_index=True,
+    )
+    last_modified_date = models.DateTimeField(
+        "Updated date",
+        auto_now=True,
+        db_index=True,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("posts:group", args=[str(self.slug)])
 
     class Meta:
         verbose_name = "Group"

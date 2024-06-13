@@ -64,7 +64,7 @@ def fetch_and_create_post():
         if not rephrased_title:
             continue
 
-        slug = generate_unique_slug(rephrased_title)
+        slug = generate_unique_slug(Post, rephrased_title)
         if len(slug) > 50:
             slug = slug[:50]
         image_content = generate_image_from_openai(rephrased_title)
