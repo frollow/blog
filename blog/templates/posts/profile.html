@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
-{% block title %}Profile {{ username.get_full_name }} {% endblock %}
+{% block title %}Profile {{ author.get_full_name }} {% endblock %}
 {% block description %}Explore personal profiles, connect with friends, and share your own stories on Wobidobi.com. Dive into a world of engaging content and social interaction!{% endblock %}
 
 {% block content %}
@@ -55,10 +55,10 @@
                                           <div class="author-container">
                                               {% thumbnail post.author.user_profile.image "50x50" crop="center" upscale=True as im %}
                                               <div class="avatar-circle _01 blog-card-bg-author-image">
-                                                  <img src="{{ im.url }}" loading="lazy" alt="{{post.author.first_name}} {{post.author.last_name}}">
+                                                  <img src="{{ im.url }}" loading="lazy" alt="{{ author.get_full_name }}">
                                               </div>
                                               {% endthumbnail %}
-                                              <div class="text-100 bold color-neutral-800">{{post.author.first_name}} {{post.author.last_name}}</div>
+                                              <div class="text-100 bold color-neutral-800">{{ author.get_full_name }}</div>
                                           </div>
                                           <div class="blog-card-bg-date-container">
                                               <div class="line-rounded-icon clock-icon dark"></div>
