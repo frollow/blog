@@ -58,7 +58,7 @@ def fetch_and_create_post():
         short_text = strip_html_tags(summary_content)[:95]
 
         rephrased_title = request_to_openai(
-            prompt=f"Please paraphrase the following title into 80 characters:\n\n{title}",
+            prompt=f"Please paraphrase the following title into 66 characters:\n\n{title}",
             model="gpt-4o-2024-05-13"
         )
         if not rephrased_title:
