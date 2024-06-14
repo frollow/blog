@@ -104,6 +104,7 @@ jobs:
             sudo docker login -u ${{ secrets.PROD_DOCKER_USERNAME }} -p ${{ secrets.PROD_DOCKER_PASSWORD }}
             sudo docker compose -f /opt/infra/docker-compose.yml pull django
             sudo docker compose -f /opt/infra/docker-compose.yml stop django
+            sudo docker compose -f /opt/infra/docker-compose.yml up -d nginx
             sudo docker compose -f /opt/infra/docker-compose.yml up -d django
             sudo docker logout
 
