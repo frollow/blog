@@ -5,13 +5,14 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from homepage.sitemaps import MainSitemap
-from posts.sitemaps import PostSitemap, ProfileSitemap, GroupSitemap
+from posts.sitemaps import GroupSitemap, PostSitemap, ProfileSitemap
+from posts.views import generate_news_sitemap
 
 sitemaps = {
     "main": MainSitemap,
     "posts": PostSitemap,
     "group": GroupSitemap,
-    'profiles': ProfileSitemap,
+    "profiles": ProfileSitemap,
     "contacts": ContactSitemap,
 }
 
@@ -30,6 +31,7 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    path("sitemap-news.xml", generate_news_sitemap, name="news_sitemap"),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -45,4 +47,5 @@ admin.site.index_title = "Welcome to the Admin Interface!"
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns += (path("__debug__/", include(debug_toolbar.urls)),)

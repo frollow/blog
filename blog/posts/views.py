@@ -1,23 +1,23 @@
+import logging
+
+from celery_singleton import clear_locks
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils import timezone
+
+from blog.celery import app as celery_app
 
 from .forms import CommentForm, PostForm
 from .models import Follow, Group, Post, User
-
-from django.http import JsonResponse
 from .tasks import fetch_and_create_post
 from .utils import insert_advertisement
 
-from celery_singleton import clear_locks
-from blog.celery import app as celery_app
-
-
-import logging
-
-logger = logging.getLogger('posts')
+logger = logging.getLogger("posts")
 
 
 def index(request):
@@ -69,7 +69,9 @@ def post_detail(request, slug):
     )
     comments = post.comments.all()
     sd = post.sd
-    absolute_url = request.build_absolute_uri(reverse("posts:post_detail", args=[post.slug]))
+    absolute_url = request.build_absolute_uri(
+        reverse("posts:post_detail", args=[post.slug])
+    )
     sd["mainEntityOfPage"] = absolute_url
     sd["url"] = absolute_url
     post.text = insert_advertisement(post.text, template="ads/post_detail.html")
@@ -162,3 +164,23 @@ def run_task_now(request):
 def unlock_tasks(request):
     clear_locks(celery_app)
     return JsonResponse({"status": "All tasks unlocked"})
+
+
+def generate_news_sitemap(request):
+    recent_posts = Post.objects.filter(
+        pub_date__gte=timezone.now() - timezone.timedelta(days=2)
+    )
+    posts_with_full_urls = [
+        {
+            "url": request.build_absolute_uri(post.get_absolute_url()),
+            "pub_date": post.pub_date.strftime("%Y-%m-%d"),
+            "title": post.title,
+            "author_name": post.author.get_full_name(),
+        }
+        for post in recent_posts
+    ]
+
+    xml_content = render_to_string(
+        "posts/sitemap/news_template.xml", {"posts": posts_with_full_urls}
+    )
+    return HttpResponse(xml_content, content_type="application/xml")
