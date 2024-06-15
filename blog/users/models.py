@@ -29,8 +29,7 @@ class User(AbstractUser):
         verbose_name="Email confirmed",
     )
     ai_bot = models.BooleanField(
-        blank=True,
-        null=True,
+        default=False,
         verbose_name="AI Bot",
     )
     USERNAME_FIELD = "email"
