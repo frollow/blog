@@ -65,7 +65,7 @@ def post_detail(request, slug):
         Post.objects.filter(group=post.group)
         .select_related("group", "author__user_profile")
         .exclude(slug=slug)
-        .order_by("-pub_date")[3:3]
+        .order_by("-pub_date")[3:6]
     )
     comments = post.comments.all()
     sd = post.sd

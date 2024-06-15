@@ -7,7 +7,7 @@ def sidebar_context(request):
         "-pub_date"
     )
     group_list = Group.objects.all()[:6]
-    popular_list = list(all_posts[:3])
+    popular_list = list(all_posts[1:4])
     random_post = random.choice(all_posts) if all_posts else None
 
     return {
