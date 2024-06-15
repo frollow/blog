@@ -1,4 +1,5 @@
 import logging
+import random
 import re
 
 import requests
@@ -103,6 +104,14 @@ def insert_advertisement(text, template: str):
 
     # Return the modified HTML as a string
     return str(soup)
+
+
+def get_random_ai_author(model):
+    ai_authors = model.objects.filter(ai_bot=True)
+    if ai_authors.exists():
+        return random.choice(ai_authors)
+    else:
+        return model.objects.first()
 
 
 def format_datetime_to_iso(datetime_field):

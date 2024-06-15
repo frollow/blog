@@ -11,6 +11,7 @@ from .models import Group, Post, User
 from .openai_client import generate_image_from_openai, request_to_openai
 from .utils import (
     clean_html,
+    get_random_ai_author,
     fetch_article_text,
     fetch_rss_items,
     generate_unique_slug,
@@ -72,7 +73,7 @@ def fetch_and_create_post():
             continue
 
         image_file = ContentFile(image_content, name=f"{slug}.png")
-        author = User.objects.first()
+        author = get_random_ai_author(User)
         group = Group.objects.get(id=1)
 
         if not ProcessedLink.objects.filter(link=link).exists():
