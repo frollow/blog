@@ -10,7 +10,7 @@ DEBUG = True
 INSTALLED_APPS = settings.INSTALLED_APPS
 MIDDLEWARE = settings.MIDDLEWARE
 INSTALLED_APPS.append("debug_toolbar")
-MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
+MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
 
 # static.py
@@ -30,3 +30,5 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+COMPRESS_ENABLED = True
