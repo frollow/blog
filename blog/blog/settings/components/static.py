@@ -24,7 +24,7 @@ AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL")
 class MediaStorage(S3Boto3Storage):
     file_overwrite = False
     location = AWS_PUBLIC_MEDIA_LOCATION
-    default_acl = 'public-read'
+    default_acl = "public-read"
     gzip = True
 
     def get_object_parameters(self, name):
@@ -37,7 +37,7 @@ class MediaStorage(S3Boto3Storage):
 class StaticStorage(S3Boto3Storage):
     file_overwrite = False
     location = AWS_STATIC_LOCATION
-    default_acl = 'public-read'
+    default_acl = "public-read"
     gzip = True
 
     def get_object_parameters(self, name):
@@ -57,3 +57,13 @@ STORAGES = {
         "BACKEND": "blog.settings.components.static.StaticStorage",
     },
 }
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    # other finders..
+    "compressor.finders.CompressorFinder",
+)
+
+
+COMPRESS_OUTPUT_DIR = "cache"
