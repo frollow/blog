@@ -57,13 +57,3 @@ STORAGES = {
         "BACKEND": "blog.settings.components.static.StaticStorage",
     },
 }
-
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    # other finders..
-    "compressor.finders.CompressorFinder",
-)
-
-COMPRESS_ROOT = "blog.settings.components.static.StaticStorage"
-COMPRESS_OUTPUT_DIR = "cache"

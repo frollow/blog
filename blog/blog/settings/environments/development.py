@@ -30,5 +30,3 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
-
-COMPRESS_ENABLED = True
