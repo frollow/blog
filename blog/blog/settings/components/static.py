@@ -65,5 +65,5 @@ STATICFILES_FINDERS = (
     "compressor.finders.CompressorFinder",
 )
 
-
+COMPRESS_ROOT = "blog.settings.components.static.StaticStorage"
 COMPRESS_OUTPUT_DIR = "cache"
