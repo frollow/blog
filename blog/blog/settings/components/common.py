@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "capture_tag",
     "django.contrib.sitemaps",
     "storages",
+    "cookie_consent",
 ]
 
 MIDDLEWARE = [

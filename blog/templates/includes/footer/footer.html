@@ -1,3 +1,4 @@
+{% url "cookie_consent_cookie_group_list" as url_cookies %}
 <footer class="footer-wrapper">
   <div data-w-id="06aad7a3-f803-05db-60f0-47a7ef403b7b" class="container-default w-container">
     <div class="footer-top pd-72px">
@@ -11,6 +12,7 @@
     </div>
     <div class="footer-bottom">
       <p class="mg-bottom-0">© {{ year }} Blog created by Frollow</p>
+      <a href="{{ url_cookies }}">Cookies</a>
     </div>
   </div>
 </footer>

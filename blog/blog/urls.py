@@ -32,6 +32,7 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     path("sitemap-news.xml", generate_news_sitemap, name="news_sitemap"),
+    path("cookies/", include("cookie_consent.urls")),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

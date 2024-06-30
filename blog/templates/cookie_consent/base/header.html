@@ -1,0 +1,23 @@
+{% load static %}
+{% load cookie_consent_tags %}
+
+{% if not request|all_cookies_accepted %}
+    {% block before_close_head %}
+        <link href="{% static 'cookie_consent/css/footer.css' %}" rel="stylesheet" type="text/css">
+    {% endblock %}
+
+    {% static "cookie_consent/cookiebar.module.js" as cookiebar_src %}
+    {% url 'cookie_consent_status' as status_url %}
+    <script type="module">
+        import {showCookieBar} from '{{ cookiebar_src }}';
+        showCookieBar({
+        statusUrl: '{{ status_url|escapejs }}',
+        templateSelector: '#cookie-consent__cookie-bar',
+        cookieGroupsSelector: '#cookie-consent__cookie-groups',
+        onShow: () => document.querySelector('body').classList.add('with-cookie-bar'),
+        onAccept: () => document.querySelector('body').classList.remove('with-cookie-bar'),
+        onDecline: () => document.querySelector('body').classList.remove('with-cookie-bar'),
+        });
+    </script>
+    {% all_cookie_groups 'cookie-consent__cookie-groups' %}
+{% endif %}

@@ -1,0 +1,38 @@
+.cookie-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 40px;
+  }
+  
+  .cookie-row {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .cookie-header {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .cookie-name {
+    margin-right: 5px;
+  }
+  
+  .cookie-domain {
+    color: #666;
+  }
+  
+  .cookie-description {
+    padding-left: 15px;
+  }
+  
+  .group-flex {
+    display: flex;
+    align-items: center;
+    grid-gap: 20px;
+  }

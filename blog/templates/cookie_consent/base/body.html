@@ -1,0 +1,11 @@
+{% url "cookie_consent_cookie_group_list" as url_cookies %}
+
+<template id="cookie-consent__cookie-bar">
+  <div class="cookie-bar">
+      <span>This site uses cookies for better performance and user experience.
+      Do you agree to use these cookies?</span>
+      <button type="button" class="cookie-consent__accept badge-primary small light category">Accept and Close</button>
+      {% comment %} <button type="button" class="cookie-consent__decline badge-primary small light category">Decline</button> {% endcomment %}
+      <a href="{{ url_cookies }}">Cookies info</a>
+  </div>
+</template>

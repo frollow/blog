@@ -4,6 +4,7 @@ Sitemap: https://wobidobi.com/sitemap-news.xml
 User-Agent: *
 Disallow: /admin*
 Disallow: /auth*
+Disallow: /cookie*
 Disallow: /posts/create/
 Disallow: *utm_
 Disallow: *search
@@ -12,6 +13,7 @@ Disallow: *page=
 User-agent: Yandex
 Disallow: /admin*
 Disallow: /auth*
+Disallow: /cookie*
 Disallow: /posts/create/
 Disallow: *utm_
 Disallow: *search
@@ -21,6 +23,7 @@ Clean-Param: yclid&gclid&utm_source&utm_medium&utm_campaign&utm_term&utm_content
 User-agent: Googlebot
 Disallow: /admin*
 Disallow: /auth*
+Disallow: /cookie*
 Disallow: /posts/create/
 Disallow: *utm_
 Disallow: *search

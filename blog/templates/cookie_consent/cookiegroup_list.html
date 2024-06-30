@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cookies | Wobidobi{% endblock %}
+{% block description %}This is a list of the categories of cookies used in our website and why we use them.{% endblock %}
+
+{% block before_close_head %}
+<link href="{% static 'cookie_consent/css/table.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="section hero-home">
+  <div class="container-default w-container">
+    <div class="rich-text w-richtext">
+      <h1 class="display-3 color-neutral-100">Cookies</h1>
+      <p>This is a list of the categories of cookies used in our website and why we use them.</p>
+      {% for cookie_group in object_list  %}
+        {% include "cookie_consent/_cookie_group.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
