@@ -60,7 +60,9 @@
         }
     }
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7665246149065553" crossorigin="anonymous"></script>
+  {% if request|cookie_group_accepted:"marketing" %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7665246149065553" crossorigin="anonymous"></script>
+  {% endif %}
   {% block before_close_head %}{% endblock %}
 </head>
 <body>
