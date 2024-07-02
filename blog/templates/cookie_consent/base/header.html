@@ -9,15 +9,20 @@
     {% static "cookie_consent/cookiebar.module.js" as cookiebar_src %}
     {% url 'cookie_consent_status' as status_url %}
     <script type="module">
-        import {showCookieBar} from '{{ cookiebar_src }}';
-        showCookieBar({
-        statusUrl: '{{ status_url|escapejs }}',
-        templateSelector: '#cookie-consent__cookie-bar',
-        cookieGroupsSelector: '#cookie-consent__cookie-groups',
-        onShow: () => document.querySelector('body').classList.add('with-cookie-bar'),
-        onAccept: () => document.querySelector('body').classList.remove('with-cookie-bar'),
-        onDecline: () => document.querySelector('body').classList.remove('with-cookie-bar'),
-        });
+        const cookiebarSrc = '{{ cookiebar_src|escapejs }}'.replace(/&amp;/g, '&');
+        try {
+            const { showCookieBar } = await import(cookiebarSrc);
+            showCookieBar({
+                statusUrl: '{{ status_url|escapejs }}',
+                templateSelector: '#cookie-consent__cookie-bar',
+                cookieGroupsSelector: '#cookie-consent__cookie-groups',
+                onShow: () => document.body.classList.add('with-cookie-bar'),
+                onAccept: () => document.body.classList.remove('with-cookie-bar'),
+                onDecline: () => document.body.classList.remove('with-cookie-bar'),
+            });
+        } catch (error) {
+            console.error('Error loading cookie bar module:', error);
+        }
     </script>
     {% all_cookie_groups 'cookie-consent__cookie-groups' %}
 {% endif %}
