@@ -15,7 +15,7 @@ DATABASES = {
         "HOST": os.getenv("DB_HOST", default="db"),
         "PORT": os.getenv("DB_PORT", default="5432"),
         "OPTIONS": {
-            "sslmode": "require",
+            "sslmode": os.getenv("DB_SSLMODE", default="require"),
         },
     }
 }
