@@ -1,8 +1,7 @@
-# Wobidobi
+# Blog
 
-Welcome to the repository of Wobidobi, your go-to free blogging platform where tech enthusiasts can publish articles, share insights, and engage with a community interested in technology. Wobidobi is built using Django and deployed on Digital Ocean, offering robust performance and reliability. This project is designed to be open-source and collaborative, inviting contributions from developers around the world.
+Welcome to the repository of "Blog", your go-to free blogging platform where tech enthusiasts can publish articles, share insights, and engage with a community interested in technology. "Blog" is built using Django and deployed on Digital Ocean, offering robust performance and reliability. This project is designed to be open-source and collaborative, inviting contributions from developers around the world.
 
-**Live Site:** [Wobidobi](https://wobidobi.com/)
 
 ## Features
 
